@@ -112,7 +112,7 @@
 }
 
 @theme {
-  --font-sans: 'Inter Variable', 'sans-serif';
+  --font-sans: 'Lexend Variable', 'sans-serif';
   /* --font-sans: 'Jersey 10', 'sans-serif'; */
   /* --font-sans: 'Jersey 15', 'sans-serif'; */
 }
@@ -125,4 +125,15 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+p {
+  max-width: 80ch;
+}
+
+#text-rotator {
+  overflow: hidden;
+  position:relative;
+  display: flex;
+  flex-direction: column;
 }

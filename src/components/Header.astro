@@ -5,7 +5,11 @@ import CoolSunglasses from "$assets/cool-sunglasses.png";
 ---
 
 <header class="container py-4 mx-auto flex justify-between items-center">
-    <a href="/" class="flex gap-2 items-center">
+    <a
+        href="/"
+        class="flex gap-2 items-center"
+        style="font-family: 'Jersey 10'; font-weight:300;"
+    >
         <!-- I can't use the <Image /> element because the image optimization & resizing by astro is not helpful as I need the "pixelated" look -->
         <img
             class="h-[51px]"
@@ -15,7 +19,7 @@ import CoolSunglasses from "$assets/cool-sunglasses.png";
         />
         <span class="text-5xl">Cool Emu</span>
     </a>
-    <nav class="flex gap-4 text-2xl h-fit">
+    <nav class="flex gap-4 text-lg h-fit">
         {
             headerNavigationLinks.map((e) => {
                 return (

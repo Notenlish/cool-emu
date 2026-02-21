@@ -1,0 +1,86 @@
+---
+
+---
+
+<div class="container mx-auto h-2/5 grid place-content-center">
+    <div class="flex flex-col items-center">
+        <h1 class="text-4xl font-bold w-full text-center px-36 mb-6">
+            <span class="text-yellow-500">Cool Emu</span>
+            is a web based console emulator for
+            <div id="text-rotator">
+                <span class="text-blue-600">NES</span>
+                <span class="text-green-600">SNES</span>
+                <span class="text-blue-600">Playstation</span>
+                <span class="text-red-600">Gameboy</span>
+            </div>
+        </h1>
+        <h2>Currently supporting emulation of no game consoles.</h2>
+        <p>
+            Welcome to Cool Emu, a web based console emulator! On this site you
+            can play all sorts of games from NES classics such as Super Mario
+            Bros to PSP games like Patapon! All you need to do is head over to
+            the respective games console and then put in the game ROM file.
+        </p>
+        <p>
+            For legal reasons we don't host game ROMS, however we hope you can
+            legally acquire the ROM of the game you are looking to play. Have
+            fun! If you like this website, you can share it with others!
+        </p>
+    </div>
+</div>
+
+<script>
+    import { gsap } from "gsap";
+    console.log(gsap);
+    console.log(gsap.version);
+
+    const container = document.getElementById("text-rotator");
+    let words = Array.from(container.children);
+    let height = words[0].getBoundingClientRect().height + 3;
+    let offsetIndex = 0;
+    // initial
+    for (const [key, value] of words.entries()) {
+        const newValue = key;
+        value.dataset.yval = `${newValue}`;
+    }
+
+    // change over time
+    setInterval(() => {
+        offsetIndex += 1;
+        for (const [key, value] of words.entries()) {
+            const newValue = key - offsetIndex;
+            value.dataset.yval = `${newValue}`;
+        }
+
+        // the last word is now visible, we need to do wrap the first word or smth.
+        if (words[words.length - 1].dataset.yval == 0) {
+            offsetIndex = -1;
+        }
+
+        // determine the css positioning
+        for (const [key, value] of words.entries()) {
+            value.style.transform = `translate(0,${Number.parseInt(value.dataset.yval) * height}px)`;
+        }
+    }, 1000);
+</script>
+
+<script lang="ts">
+    // If I add lang="ts" into here then I cant import gsap
+    let totalWords = 0;
+    const container = document.getElementById("text-rotator");
+    console.log(container);
+    let words = Array.from(container.children);
+
+    let longest = 0;
+    let height = words[0].getBoundingClientRect().height + 3;
+    for (const [key, value] of words.entries()) {
+        value.style.position = "absolute";
+        value.style.transform = `translate(0,${key * height}px)`;
+        if (value.textContent.length >= longest) {
+            longest = value.textContent.length;
+        }
+    }
+
+    container.style.maxWidth = `${longest * 20}px`;
+    container.style.height = `${height}px`;
+</script>
