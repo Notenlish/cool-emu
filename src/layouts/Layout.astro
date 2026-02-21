@@ -1,0 +1,44 @@
+---
+import Header from "src/components/Header.astro";
+import "@fontsource/jersey-10";
+import "@fontsource/jersey-15";
+import '@fontsource-variable/inter';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="/icon/favicon-96x96.png"
+			sizes="96x96"
+		/>
+		<link rel="icon" type="image/svg+xml" href="/icon/favicon.svg" />
+		<link rel="shortcut icon" href="/icon/favicon.ico" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/icon/apple-touch-icon.png"
+		/>
+		<meta name="apple-mobile-web-app-title" content="Cool Emu" />
+		<link rel="manifest" href="/icon/site.webmanifest" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Cool Emu</title>
+	</head>
+	<body class="w-full">
+		<Header />
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

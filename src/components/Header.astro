@@ -1,0 +1,30 @@
+---
+import { headerNavigationLinks } from "$lib/data/navigation";
+import Image from "astro/components/Image.astro";
+import CoolSunglasses from "$assets/cool-sunglasses.png";
+---
+
+<header class="container py-4 mx-auto flex justify-between items-center">
+    <a href="/" class="flex gap-2 items-center">
+        <!-- I can't use the <Image /> element because the image optimization & resizing by astro is not helpful as I need the "pixelated" look -->
+        <img
+            class="h-[51px]"
+            style={"aspect-ratio:1/1;image-rendering: pixelated;"}
+            alt="Cool Emu"
+            src="/small-cool-sunglasses.png"
+        />
+        <span class="text-5xl">Cool Emu</span>
+    </a>
+    <nav class="flex gap-4 text-2xl h-fit">
+        {
+            headerNavigationLinks.map((e) => {
+                return (
+                    <a class="opacity-70 hover:opacity-100" href={e.url}>
+                        {e.text}
+                    </a>
+                );
+            })
+        }
+    </nav>
+    <div></div>
+</header>
