@@ -1,7 +1,6 @@
 ---
 import { headerNavigationLinks } from "$lib/data/navigation";
-import Image from "astro/components/Image.astro";
-import CoolSunglasses from "$assets/cool-sunglasses.png";
+import { Button } from "$lib/components/ui/button/index.js";
 ---
 
 <header class="container py-4 mx-auto flex justify-between items-center">
@@ -30,5 +29,10 @@ import CoolSunglasses from "$assets/cool-sunglasses.png";
             })
         }
     </nav>
-    <div></div>
+    <div>
+        <Button
+            variant="default"
+            class="pixel-corners-s bg-pink-500 hover:bg-pink-300">Play a game</Button
+        >
+    </div>
 </header>
