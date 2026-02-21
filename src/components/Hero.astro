@@ -35,6 +35,8 @@
     console.log(gsap.version);
 
     const container = document.getElementById("text-rotator");
+    if (!container) new Error("text-rotator doesnt exist!");
+
     let words = Array.from(container.children);
     let height = words[0].getBoundingClientRect().height + 3;
     let offsetIndex = 0;
@@ -46,20 +48,21 @@
 
     // change over time
     setInterval(() => {
-        offsetIndex += 1;
-        for (const [key, value] of words.entries()) {
-            const newValue = key - offsetIndex;
-            value.dataset.yval = `${newValue}`;
-        }
+        words = Array.from(container.children);
+        let firstEl = words[0];
+        words[0].remove();
+        container.appendChild(firstEl);
 
-        // the last word is now visible, we need to do wrap the first word or smth.
-        if (words[words.length - 1].dataset.yval == 0) {
-            offsetIndex = -1;
-        }
-
-        // determine the css positioning
         for (const [key, value] of words.entries()) {
-            value.style.transform = `translate(0,${Number.parseInt(value.dataset.yval) * height}px)`;
+            gsap.fromTo(
+                value,
+                {
+                    translateY: key * height,
+                },
+                {
+                    translateY: (key - 1) * height,
+                },
+            );
         }
     }, 1000);
 </script>
