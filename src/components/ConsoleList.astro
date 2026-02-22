@@ -7,7 +7,7 @@ import Image from "astro/components/Image.astro";
     {
         supportedConsoles.map((e) => {
             return (
-                <div class="text-white rounded cursor-pointer flex gap-2 w-fit p-3" style={`background-color: ${e.color};`}>
+                <a href={e.playUrl} class="text-white rounded cursor-pointer flex gap-2 w-fit p-3" style={`background-color: ${e.color};`}>
                     <Image
                         height={32}
                         width={32}
@@ -15,7 +15,7 @@ import Image from "astro/components/Image.astro";
                         alt="controller"
                     />
                     Play {e.name}
-                </div>
+                </a>
             );
         })
     }
