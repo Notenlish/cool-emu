@@ -1,34 +1,57 @@
 ---
-
+import Layout from "src/layouts/Layout.astro";
 ---
 
-I love emulating nes games!
+<Layout>
+    <div class="container mx-auto mt-12">
+        <p>Emulating nes games on web is cool</p>
 
-<div style="width:640px;height:480px;max-width:100%">
-    <div id="game"></div>
-</div>
+        <label for="romInput">Please enter your nes game:</label>
+        <input type="file" id="romInput" accept=".nes,.rom" />
+
+        <div style="width:640px;height:480px;max-width:100%">
+            <div id="game"></div>
+        </div>
+    </div>
+</Layout>
 
 <script type="text/javascript">
-    EJS_player = "#game";
+    const input = document.getElementById("romInput");
 
-    // Can also be fceumm or nestopia
-    EJS_core = "nes";
+    input.addEventListener("change", (e) => {
+        console.log(e);
+        console.log(e.target);
+        const file = input.files[0];
+        if (!file) console.log("File not found!");
 
-    // URL to BIOS file
-    EJS_biosUrl = "";
+        const blobUrl = URL.createObjectURL(file);
 
-    /*
-    File Name	    Description	                                                                                                md5sum
-    disksys.rom	    Family Computer Disk System BIOS - Required for Famicom Disk System emulation	                            ca30b50f880eb660a320674ed365ef7a
-    gamegenie.nes	Game Genie add-on cartridge - Required for Game Genie Add-on emulation (Only supported on the fceumm core)	7f98d77d7a094ad7d069b74bd553ec98
-    */
+        EJS_player = "#game";
+        // Can also be fceumm or nestopia
+        EJS_core = "nes";
 
-    // URL to Game rom
-    EJS_gameUrl = "";
+        // URL to BIOS file
+        // EJS_biosUrl = "https://archive.org/download/disksys_202501/disksys.rom";
+        EJS_biosUrl = "";
 
-    // Path to the data directory
-    EJS_pathtodata = "data/";
-    EJS_DEBUG_XX = true;
+        /*
+        File Name	    Description	                                                                                                md5sum
+        disksys.rom	    Family Computer Disk System BIOS - Required for Famicom Disk System emulation	                            ca30b50f880eb660a320674ed365ef7a
+        gamegenie.nes	Game Genie add-on cartridge - Required for Game Genie Add-on emulation (Only supported on the fceumm core)	7f98d77d7a094ad7d069b74bd553ec98
+        */
+
+        // URL to Game rom
+        EJS_gameUrl = blobUrl;
+
+        // Path to the data directory
+        EJS_pathtodata = "data/";
+        EJS_DEBUG_XX = true;
+        EJS_language = "en-US";
+
+        const scriptTag = document.createElement("script");
+        scriptTag.src = "data/loader.js";
+        document.body.appendChild(scriptTag);
+    });
 </script>
 
-<script is:inline src="data/loader.js"></script>
+<!-- <script is:inline src="data/loader.js"></script> -->

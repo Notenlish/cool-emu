@@ -49,3 +49,9 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 ## Fonts
 
 Fonts are installed locally, discover fonts using [FontSource](https://fontsource.org/).
+
+## Emulatorjs/emulatorjs 
+
+version used is https://github.com/EmulatorJS/EmulatorJS/releases/tag/v4.2.3
+
+I have modified the turkish language pack btw.

@@ -876,6 +876,7 @@ class EmulatorJS {
                 });
             }
             const downloadFile = async () => {
+                // console.log("Downloading a file", this.config.gameUrl)
                 const res = await this.downloadFile(this.config.gameUrl, (progress) => {
                     this.textElem.innerText = this.localization("Download Game Data") + progress;
                 }, true, { responseType: "arraybuffer", method: "GET" });

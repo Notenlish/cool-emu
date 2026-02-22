@@ -335,5 +335,8 @@
     "System Save interval": "System Save interval",
     "Menu Bar Button": "Menu Bar Button",
     "visible": "visible",
-    "hidden": "hidden"
+    "hidden": "hidden",
+    "EJECT/INSERT DISK":"EJECT/INSERT DISK",
+    "SWAP DISKS":"SWAP DISKS",
+    "Exit Emulation":"Exit Emulation"
 }
