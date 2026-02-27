@@ -4,12 +4,34 @@ import Image from "astro/components/Image.astro";
 import { Button } from "$lib/components/ui/button";
 ---
 
-<div class="bg-slate-50 pt-8">
+<div class="bg-slate-50 pt-8 pb-12">
     <div class="container mx-auto">
         <h2 class="text-3xl font-bold mb-6">
             Consoles Available for Emulation
         </h2>
-        <div class="flex flex-wrap gap-4">
+        <div class="grid grid-cols-4 grid-rows-3 gap-6 aspect-[16/9]">
+            {
+                supportedConsoles.map((e) => {
+                    return (
+                        <Button
+                            variant="link"
+                            href={e.playUrl}
+                            class={`"text-white rounded text-lg cursor-pointer flex gap-2 w-full h-full text-white p-3" ${e.cssClass}`}
+                            style={`background-color: ${e.color};`}
+                        >
+                            <Image
+                                height={48}
+                                width={48}
+                                src={e.imgUrl}
+                                alt="controller"
+                            />
+                            Play {e.name}
+                        </Button>
+                    );
+                })
+            }
+        </div>
+        <!-- <div class="flex flex-wrap gap-4">
             {
                 supportedConsoles.map((e) => {
                     return (
@@ -30,6 +52,6 @@ import { Button } from "$lib/components/ui/button";
                     );
                 })
             }
-        </div>
+        </div> -->
     </div>
 </div>

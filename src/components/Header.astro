@@ -1,6 +1,9 @@
 ---
 import { headerNavigationLinks } from "$lib/data/navigation";
-import { Button } from "$lib/components/ui/button/index.js";
+import { Button } from "$lib/components/ui/button";
+import Image from "astro/components/Image.astro";
+import HeartIcon from "$assets/heart.svg";
+import HeartPixelatedIcon from "$assets/heart-pixelated.svg";
 ---
 
 <header class="container py-4 mx-auto flex justify-between items-center">
@@ -31,8 +34,27 @@ import { Button } from "$lib/components/ui/button/index.js";
     </nav>
     <div>
         <Button
-            variant="default"
-            class="pixel-corners-s bg-pink-500 hover:bg-pink-300">Play a game</Button
+            href="https://buymeacoffee.com/notenlish"
+            variant="link"
+            target="_blank"
+            class="bg-rose-500 hover:bg-rose-300 text-white py-6 px-6 flex align-center"
         >
+            <Image src={HeartIcon} class="opacity-70" alt="heart" height={24} />
+            Donate
+        </Button>
+        <!-- <Button
+            href="https://buymeacoffee.com/notenlish"
+            variant="link"
+            target="_blank"
+            class="bg-rose-500 hover:bg-rose-300 text-white py-6 px-6 flex align-center"
+        >
+            <Image
+                src={HeartPixelatedIcon}
+                class="opacity-70 -translate-y-[0.1rem]"
+                alt="heart"
+                height={24}
+            />
+            Donate
+        </Button> -->
     </div>
 </header>
