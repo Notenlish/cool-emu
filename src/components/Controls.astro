@@ -1,0 +1,28 @@
+---
+interface Props {
+    rows: { name: string; key: string }[];
+}
+const { rows } = Astro.props;
+const rowTw = "border font-normal";
+const colLeftTw = "border py-1 px-2 text-left pr-6 font-normal";
+const colRightTw = "border py-1 px-2 text-left pr-6 font-normal";
+---
+
+<h2 class="text-2xl mt-12 mb-4">Controls</h2>
+<p>
+    <table class="border">
+        <tr class={rowTw}><th>Name</th><th>Key</th> </tr>
+        {
+            rows.map((e) => {
+                return (
+                    <tr class={rowTw}>
+                        <>
+                            <th class={colLeftTw}>{e.name}</th>
+                            <th class={colRightTw}>{e.key}</th>
+                        </>
+                    </tr>
+                );
+            })
+        }
+    </table>
+</p>
