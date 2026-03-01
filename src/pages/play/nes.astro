@@ -4,6 +4,7 @@ import Layout from "src/layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
 import NesConsoleImage from "$assets/consoles/NES-Console-Set.png";
 import Controls from "src/components/Controls.astro";
+import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 
 const controlsData = [
     { name: "Button A", key: "Z" },
@@ -59,15 +60,16 @@ const controlsData = [
             </p>
         </div>
         <div class="">
-            NES image by <a
-                class="text-blue-500"
+            NES image by
+            <SimpleLink
+                target="_blank"
                 href="//commons.wikimedia.org/wiki/User:Evan-Amos"
-                title="User:Evan-Amos">Evan-Amos</a
+                >Evan-Amos</SimpleLink
             > - <span class="int-own-work" lang="en">Own work</span>, Public
-            Domain, <a
-                class="text-blue-500"
+            Domain, <SimpleLink
+                target="_blank"
                 href="https://commons.wikimedia.org/w/index.php?curid=11408831"
-                >Link</a
+                >Link</SimpleLink
             >
         </div>
     </div>

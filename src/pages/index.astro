@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "src/components/Hero.astro";
 import ConsoleList from "src/components/ConsoleList.astro";
 import Features from "src/components/Features.astro";
+import FAQ from "src/components/Faq.svelte";
 ---
 
 <Layout>
@@ -13,8 +14,8 @@ import Features from "src/components/Features.astro";
 	<FeaturedGames />
 	<Games />
 	<GameCategories />
-	<FAQ />
 	-->
+	<FAQ client:load />
 	<!-- TODO: Maybe add game categories to the header too? -->
 	<!-- TODO: I should honestly just go and copy websites like https://www.kraloyun.com/ and https://www.oyunskor.com/ -->
 	<!-- TODO: Make pages for all the cheat codes for spesific games -->

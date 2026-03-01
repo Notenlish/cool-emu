@@ -127,6 +127,13 @@
   }
 }
 
+.simplelink {
+  text-decoration: underline;
+}
+.simplelink:hover {
+  opacity: 60%;
+}
+
 p {
   max-width: 80ch;
   margin-bottom: 1rem;

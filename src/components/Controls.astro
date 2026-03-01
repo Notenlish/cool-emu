@@ -3,7 +3,7 @@ interface Props {
     rows: { name: string; key: string }[];
 }
 const { rows } = Astro.props;
-const rowTw = "border font-normal";
+const rowTw = "border font-normal even:bg-neutral-100 first:bg-transparent";
 const colLeftTw = "border py-1 px-2 text-left pr-6 font-normal";
 const colRightTw = "border py-1 px-2 text-left pr-6 font-normal";
 ---
