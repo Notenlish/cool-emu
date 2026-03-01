@@ -16,9 +16,14 @@ import { Button } from "$lib/components/ui/button";
                         <Button
                             variant="link"
                             href={e.playUrl}
-                            class={`"text-white rounded text-lg cursor-pointer flex gap-2 w-full h-full text-white p-3" ${e.cssClass}`}
+                            class={`relative text-white rounded text-lg cursor-pointer flex gap-2 w-full h-full p-3 ${e.cssClass}`}
                             style={`background-color: ${e.color};`}
                         >
+                            <Image
+                                class={`absolute left-auto right-auto top-auto bottom-auto h-[90%] w-max opacity-10 invert ${e.id == "ps" && "scale-150"}`}
+                                src={e.imgUrl}
+                                alt="controller"
+                            />
                             <Image
                                 height={48}
                                 width={48}

@@ -5,7 +5,7 @@
 
 <section class="container mx-auto mt-12 flex flex-col items-center" id="faq">
     <h2 class="text-3xl text-center w-full font-bold mb-6">Got a Question?</h2>
-    <Accordion.Root type="single" class="w-full sm:max-w-[70%]" value="item-1">
+    <Accordion.Root type="single" class="w-full sm:max-w-[70%]" value="">
         <Accordion.Item value="item-1">
             <Accordion.Trigger>How does this work?</Accordion.Trigger>
             <Accordion.Content class="flex flex-col gap-4 text-balance">
