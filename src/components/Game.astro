@@ -1,0 +1,26 @@
+---
+import type {
+    CollectionEntry,
+    CollectionKey,
+    ContentCollectionKey,
+    DataCollectionKey,
+    SchemaContext,
+} from "astro:content";
+
+import NotFoundImage from "$assets/image-not-found.png";
+import Image from "astro/components/Image.astro";
+interface Props {
+    gameObject: CollectionEntry<"romgames">;
+}
+const { gameObject } = Astro.props;
+---
+
+<div>
+    <Image
+        width={144}
+        height={144}
+        src={gameObject.data.imgPath || NotFoundImage}
+        alt={gameObject.data.name}
+    />
+    <span>{gameObject.data.name}</span>
+</div>

@@ -1,0 +1,30 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import { getCollection, getEntry } from "astro:content";
+import Game from "src/components/Game.astro";
+
+const allRomGames = await getCollection("romgames");
+import { supportedConsoles } from "$lib/data/consoles";
+---
+
+<Layout>
+    <div class="container mx-auto flex flex-col items-center mt-12 pb-12">
+        <h1 class="text-4xl font-medium w-full text-center px-32">
+            <span class="font-bold">Games</span>
+        </h1>
+        <p class="text-center w-full">
+            You can find games for all the different consoles we support in
+            here. Supported consoles: {
+                supportedConsoles.map((e, i) => {
+                    if (i == supportedConsoles.length - 1) {
+                        return <span>{e.name}.</span>;
+                    }
+                    return <span>{e.name}, </span>;
+                })
+            }
+        </p>
+        <div>
+            {allRomGames.map((game) => <Game gameObject={game} />)}
+        </div>
+    </div>
+</Layout>
