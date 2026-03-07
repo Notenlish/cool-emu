@@ -115,6 +115,13 @@
   --font-sans: 'Lexend Variable', 'sans-serif';
   /* --font-sans: 'Jersey 10', 'sans-serif'; */
   /* --font-sans: 'Jersey 15', 'sans-serif'; */
+  --animate-pulse-small: pulse-small 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.6;
+    }
+  }
 }
 
 @layer base {
@@ -130,6 +137,7 @@
 .simplelink {
   text-decoration: underline;
 }
+
 .simplelink:hover {
   opacity: 60%;
 }

@@ -49,7 +49,7 @@ const romGamesToMap = Object.entries(romGamesByConsoles);
                     return (
                         <div>
                             <h2 class="text-3xl mb-6">{capitaliseWords(unslug(key))}</h2>
-                            <div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+                            <div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
                                 {romGameArray.map((g) => {
                                     return <Game gameObject={g} />;
                                 })}

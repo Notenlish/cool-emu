@@ -16,6 +16,7 @@ pnpm-debug.log*
 public/gameimages/*
 scraper/gameimages/*
 roms.json
+rows.json
 
 # environment variables
 .env

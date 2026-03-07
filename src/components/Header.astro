@@ -21,7 +21,7 @@ import HeartPixelatedIcon from "$assets/heart-pixelated.svg";
         />
         <span class="text-5xl">Cool Emu</span>
     </a>
-    <nav class="flex gap-4 text-lg h-fit">
+    <nav class="flex gap-6 text-lg h-fit">
         {
             headerNavigationLinks.map((e) => {
                 return (
@@ -39,7 +39,14 @@ import HeartPixelatedIcon from "$assets/heart-pixelated.svg";
             target="_blank"
             class="bg-rose-500 hover:bg-rose-300 text-white py-6 px-6 flex align-center"
         >
-            <Image src={HeartIcon} class="opacity-70" alt="heart" height={24} />
+            <div class="relative">
+                <Image
+                    src={HeartIcon}
+                    class="opacity-70 animate-pulse"
+                    alt="heart"
+                    height={24}
+                />
+            </div>
             Donate
         </Button>
         <!-- <Button

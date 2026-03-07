@@ -53,12 +53,15 @@ class RomsGamesSpider(scrapy.Spider):
                         f.write(img.content)
                 else:  # file exists already so dont try to download it.
                     pass
+                imgPath = p.as_posix()
+            elif imgUrl == "":
+                imgPath = ""
 
             name = "".join(elem.css("div.text-sm::text").getall()).strip()
             yield {
                 "href": response.urljoin(elem.attrib.get("href")),
                 "name": name,
-                "imgPath": p.as_posix(),
+                "imgPath": imgPath,
                 "imgUrl": imgUrl,
                 "category": category,
                 "slug": slugify(category) + "-rom-" + slugify(name),

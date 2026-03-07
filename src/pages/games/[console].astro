@@ -1,0 +1,54 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "src/layouts/Layout.astro";
+import Game from "src/components/Game.astro";
+import { unslug, capitaliseWords } from "$lib/utils";
+
+export const getStaticPaths = (() => {
+    return [
+        {
+            params: { console: "sega-saturn" },
+        },
+    ];
+}) satisfies GetStaticPaths;
+const { console } = Astro.params;
+
+//
+//
+
+import { getCollection, type CollectionEntry } from "astro:content";
+type RomGame = CollectionEntry<"romgames">;
+type Console = RomGame["data"]["category"];
+type GenericDict<K extends string, V> = Record<K, V>;
+
+const allRomGames = await getCollection("romgames");
+
+let romGamesByConsoles: GenericDict<string, Array<RomGame>> = {};
+for (const rg of allRomGames) {
+    if (romGamesByConsoles[rg.data.category] == undefined) {
+        romGamesByConsoles[rg.data.category] = [];
+    }
+    romGamesByConsoles[rg.data.category].push(rg);
+}
+const key = console;
+const romGameArray = romGamesByConsoles[console];
+---
+
+<Layout>
+    <div class="w-full">
+        <div>
+            <h2 class="text-3xl mb-6">
+                {capitaliseWords(unslug(key))}
+            </h2>
+            <div
+                class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
+            >
+                {
+                    romGameArray.map((g) => {
+                        return <Game gameObject={g} />;
+                    })
+                }
+            </div>
+        </div>
+    </div>
+</Layout>
