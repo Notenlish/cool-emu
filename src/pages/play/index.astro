@@ -1,0 +1,35 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import { supportedConsoles } from "$lib/data/consoles";
+import Image from "astro/components/Image.astro";
+import { Button } from "$lib/components/ui/button";
+---
+
+<Layout>
+    <section class="mx-auto container">
+        <h1 class="text-3xl text-center w-full mb-12 mt-24 flex">Play & Emulate Consoles</h1>
+        <div class="flex flex-wrap gap-4">
+            {
+                supportedConsoles.map((e) => {
+                    return (
+                        <Button
+                            variant="link"
+                            href={e.playUrl}
+                            size="xl"
+                            class="text-white rounded cursor-pointer flex gap-2 w-fit p-3"
+                            style={`background-color: ${e.color};`}
+                        >
+                            <Image
+                                height={42}
+                                width={42}
+                                src={e.imgUrl}
+                                alt="controller"
+                            />
+                            Play {e.name}
+                        </Button>
+                    );
+                })
+            }
+        </div>
+    </section>
+</Layout>

@@ -11,11 +11,12 @@ import NotFoundImage from "$assets/image-not-found.png";
 import Image from "astro/components/Image.astro";
 interface Props {
     gameObject: CollectionEntry<"romgames">;
+    layout: "grid" | "flex";
 }
-const { gameObject } = Astro.props;
+const { gameObject, layout } = Astro.props;
 ---
 
-<div>
+<div class={`min-w-32 flex flex-col items-center grow ${layout == "flex" && "min-w-40"}`}>
     <Image
         width={144}
         height={144}
@@ -24,5 +25,5 @@ const { gameObject } = Astro.props;
             : NotFoundImage}
         alt={gameObject.data.name}
     />
-    <span>{gameObject.data.name}</span>
+    <span class="text-center block">{gameObject.data.name}</span>
 </div>

@@ -2,7 +2,7 @@
 import Layout from "src/layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import Game from "src/components/Game.astro";
-import {unslug, capitaliseWords} from "$lib/utils";
+import { unslug, capitaliseWords } from "$lib/utils";
 
 type RomGame = CollectionEntry<"romgames">;
 type Console = RomGame["data"]["category"];
@@ -45,13 +45,15 @@ const romGamesToMap = Object.entries(romGamesByConsoles);
                 // there has to be a better way to do this
                 romGamesToMap.map((e) => {
                     const key = e[0];
-                    const romGameArray = e[1];
+                    const romGameArray = e[1].slice(0,40 );  // TODO: get rid of the .slice()
                     return (
                         <div>
-                            <h2 class="text-3xl mb-6">{capitaliseWords(unslug(key))}</h2>
-                            <div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+                            <h2 class="text-3xl mb-6">
+                                {capitaliseWords(unslug(key))}
+                            </h2>
+                            <div class="flex gap-4 overflow-x-scroll">
                                 {romGameArray.map((g) => {
-                                    return <Game gameObject={g} />;
+                                    return <Game layout="flex" gameObject={g} />;
                                 })}
                             </div>
                         </div>
