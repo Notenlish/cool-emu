@@ -19,7 +19,7 @@ const { gameObject } = Astro.props;
     <Image
         width={144}
         height={144}
-        src={gameObject.data.imgPath || NotFoundImage}
+        src={`/${gameObject.data.imgPath || NotFoundImage}`}
         alt={gameObject.data.name}
     />
     <span>{gameObject.data.name}</span>

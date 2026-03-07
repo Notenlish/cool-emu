@@ -13,6 +13,7 @@ const romgames = defineCollection({
         href: z.string().startsWith("https://"),
         name: z.string(),
         imgPath: z.string(),
+        imgUrl: z.string(),
         category: z.string(),
         slug: z.string(),
     })

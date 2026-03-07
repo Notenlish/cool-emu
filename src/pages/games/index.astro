@@ -1,14 +1,28 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import Game from "src/components/Game.astro";
+import {unslug, capitaliseWords} from "$lib/utils";
+
+type RomGame = CollectionEntry<"romgames">;
+type Console = RomGame["data"]["category"];
 
 const allRomGames = await getCollection("romgames");
 import { supportedConsoles } from "$lib/data/consoles";
+
+type GenericDict<K extends string, V> = Record<K, V>;
+let romGamesByConsoles: GenericDict<string, Array<RomGame>> = {};
+for (const rg of allRomGames) {
+    if (romGamesByConsoles[rg.data.category] == undefined) {
+        romGamesByConsoles[rg.data.category] = [];
+    }
+    romGamesByConsoles[rg.data.category].push(rg);
+}
+const romGamesToMap = Object.entries(romGamesByConsoles);
 ---
 
 <Layout>
-    <div class="container mx-auto flex flex-col items-center mt-12 pb-12">
+    <section class="container mx-auto flex flex-col items-center mt-12 pb-12">
         <h1 class="text-4xl font-medium w-full text-center px-32">
             <span class="font-bold">Games</span>
         </h1>
@@ -23,8 +37,27 @@ import { supportedConsoles } from "$lib/data/consoles";
                 })
             }
         </p>
-        <div>
+        <!-- <div>
             {allRomGames.map((game) => <Game gameObject={game} />)}
+        </div> -->
+        <div class="w-full">
+            {
+                // there has to be a better way to do this
+                romGamesToMap.map((e) => {
+                    const key = e[0];
+                    const romGameArray = e[1];
+                    return (
+                        <div>
+                            <h2 class="text-3xl mb-6">{capitaliseWords(unslug(key))}</h2>
+                            <div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+                                {romGameArray.map((g) => {
+                                    return <Game gameObject={g} />;
+                                })}
+                            </div>
+                        </div>
+                    );
+                })
+            }
         </div>
-    </div>
+    </section>
 </Layout>

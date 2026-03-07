@@ -31,46 +31,50 @@ const controlsData = [
             aspectRatioTailwind="aspect-[4/3]"
             core="nes"
         />
-        <Controls rows={controlsData} />
-        <h2 class="text-2xl mt-12 mb-4">NES (Nintendo Entertainment System)</h2>
-        <div class="flex gap-4">
-            <Image
-                src={NesConsoleImage}
-                alt="nes console image"
-                width={320}
-                height={180}
-                class="aspect-video h-fit"
-            />
-            <p>
-                Nintendo Entertainment System(NES) is a video game console
-                developed by Nintendo. Even though it is known as Nintendo
-                Entertainment System globally, it was released under the name
-                "Family Computer(Famicom)" in Japan on <time
-                    datetime="1983-7-15">15th of July 1983</time
-                >. NES was launched in the US on <time datetime="1986-9-27"
-                    >September 27, 1986</time
-                >. Nintendo Entertainment System competed with the Master System
-                by Sega.
-                <br />
-                The hardware of the NES was based on the 1981 arcade game called "Donkey
-                Kong" which was released by Nintendo. Because Nintendo released the
-                NES system after the video game crash of 1983, NES was quickly able
-                to dominate the market and it successfully made Nintendo a monopoly
-                in the home console market.
-            </p>
-        </div>
-        <div class="">
-            NES image by
-            <SimpleLink
-                target="_blank"
-                href="//commons.wikimedia.org/wiki/User:Evan-Amos"
-                >Evan-Amos</SimpleLink
-            > - <span class="int-own-work" lang="en">Own work</span>, Public
-            Domain, <SimpleLink
-                target="_blank"
-                href="https://commons.wikimedia.org/w/index.php?curid=11408831"
-                >Link</SimpleLink
-            >
-        </div>
+        <section id="aboutConsole">
+            <Controls rows={controlsData} />
+            <h2 class="text-2xl mt-12 mb-4">
+                NES (Nintendo Entertainment System)
+            </h2>
+            <div class="flex gap-4">
+                <Image
+                    src={NesConsoleImage}
+                    alt="nes console image"
+                    width={320}
+                    height={180}
+                    class="aspect-video h-fit"
+                />
+                <p>
+                    Nintendo Entertainment System(NES) is a video game console
+                    developed by Nintendo. Even though it is known as Nintendo
+                    Entertainment System globally, it was released under the
+                    name "Family Computer(Famicom)" in Japan on <time
+                        datetime="1983-7-15">15th of July 1983</time
+                    >. NES was launched in the US on <time datetime="1986-9-27"
+                        >September 27, 1986</time
+                    >. Nintendo Entertainment System competed with the Master
+                    System by Sega.
+                    <br />
+                    The hardware of the NES was based on the 1981 arcade game called
+                    "Donkey Kong" which was released by Nintendo. Because Nintendo
+                    released the NES system after the video game crash of 1983, NES
+                    was quickly able to dominate the market and it successfully made
+                    Nintendo a monopoly in the home console market.
+                </p>
+            </div>
+            <div class="">
+                NES image by
+                <SimpleLink
+                    target="_blank"
+                    href="//commons.wikimedia.org/wiki/User:Evan-Amos"
+                    >Evan-Amos</SimpleLink
+                > - <span class="int-own-work" lang="en">Own work</span>, Public
+                Domain, <SimpleLink
+                    target="_blank"
+                    href="https://commons.wikimedia.org/w/index.php?curid=11408831"
+                    >Link</SimpleLink
+                >
+            </div>
+        </section>
     </div>
 </Layout>
