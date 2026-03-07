@@ -1,0 +1,22 @@
+---
+import FeaturedGamesOfConsole from "./FeaturedGamesOfConsole.astro";
+import { getGamesOfAllConsolesAsEntries } from "$lib/data/consoles";
+
+const romGamesToMap = await getGamesOfAllConsolesAsEntries();
+---
+
+<div class="w-full">
+    {
+        romGamesToMap.map((o) => {
+            const category = o[0];
+            const games = o[1];
+
+            return (
+                <FeaturedGamesOfConsole
+                    consoleCategory={category}
+                    romGameArray={games}
+                />
+            );
+        })
+    }
+</div>

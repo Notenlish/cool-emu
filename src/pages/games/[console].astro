@@ -3,6 +3,9 @@ import type { GetStaticPaths } from "astro";
 import Layout from "src/layouts/Layout.astro";
 import Game from "src/components/Game.astro";
 import { unslug, capitaliseWords } from "$lib/utils";
+import { Button } from "$lib/components/ui/button";
+import Image from "astro/components/Image.astro";
+import { supportedConsoles } from "$lib/data/consoles";
 
 export const getStaticPaths = (() => {
     return [
@@ -32,14 +35,35 @@ for (const rg of allRomGames) {
 }
 const key = console;
 const romGameArray = romGamesByConsoles[console];
+
+//
+
+const playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
 ---
 
 <Layout>
-    <div class="w-full container mx-auto">
+    <div class="w-full container mx-auto pt-[15vh]">
         <div>
-            <h2 class="text-3xl mb-6">
-                {capitaliseWords(unslug(key))}
-            </h2>
+            <div class="w-full flex justify-between">
+                <h2 class="text-3xl mb-6">
+                    Find Games for {capitaliseWords(unslug(key))}
+                </h2>
+                <Button
+                    variant="link"
+                    href={playConsoleMetadata.playUrl}
+                    size="lg"
+                    class="text-white rounded cursor-pointer flex gap-2 w-fit p-3"
+                    style={`background-color: ${playConsoleMetadata.color};`}
+                >
+                    <Image
+                        height={42}
+                        width={42}
+                        src={playConsoleMetadata.imgUrl}
+                        alt="controller"
+                    />
+                    Play {playConsoleMetadata.name}
+                </Button>
+            </div>
             <div
                 class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
             >

@@ -1,0 +1,63 @@
+---
+import { type CollectionEntry } from "astro:content";
+import Game from "src/components/Game.astro";
+import { unslug, capitaliseWords } from "$lib/utils";
+import NewLinkArrow from "$assets/new-link-arrow.svg";
+import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
+
+type RomGame = CollectionEntry<"romgames">;
+interface Props {
+    consoleCategory: string;
+    romGameArray: RomGame[];
+    variant: "default" | "differentTitle";
+}
+const { consoleCategory, romGameArray, variant = "default" } = Astro.props;
+
+let romGamesToUse = romGameArray.slice(0, 50);
+let consoleTitle = capitaliseWords(unslug(consoleCategory));
+---
+
+<div class="w-full">
+    <div>
+        {
+            variant == "default" ? (
+                <SimpleLink
+                    class="w-fit block"
+                    href={`/games/${consoleCategory}`}
+                >
+                    <h2 class="text-3xl mb-4 w-fit">
+                        <span>{consoleTitle}</span>
+                        <NewLinkArrow
+                            class={"inline-block -translate-x-1 -translate-y-2"}
+                            width={32}
+                            height={32}
+                        />
+                    </h2>
+                </SimpleLink>
+            ) : (
+                <div>
+                    <h2 class="text-2xl mb-4 mt-8">
+                        Featured Games for{" "}
+                        <SimpleLink href={`/games/${consoleCategory}`}>
+                            {consoleTitle}
+                            <NewLinkArrow
+                                class={
+                                    "inline-block -translate-y-2"
+                                }
+                                width={24}
+                                height={24}
+                            />
+                        </SimpleLink>
+                    </h2>
+                </div>
+            )
+        }
+        <div class="flex gap-4 overflow-x-scroll">
+            {
+                romGamesToUse.map((g) => {
+                    return <Game layout="flex" gameObject={g} />;
+                })
+            }
+        </div>
+    </div>
+</div>

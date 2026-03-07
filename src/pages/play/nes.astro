@@ -6,6 +6,10 @@ import NesConsoleImage from "$assets/consoles/NES-Console-Set.png";
 import Controls from "src/components/Controls.astro";
 import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 
+import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
+import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
+const gamesToMap = await getGamesOfConsoleAsEntries("sega-saturn");
+
 const controlsData = [
     { name: "Button A", key: "Z" },
     { name: "Button B", key: "X" },
@@ -31,8 +35,15 @@ const controlsData = [
             aspectRatioTailwind="aspect-[4/3]"
             core="nes"
         />
+        <Controls rows={controlsData} />
+        <section id="featuredGames">
+            <FeaturedGamesOfConsole
+                romGameArray={gamesToMap[1]}
+                consoleCategory={gamesToMap[0]}
+                variant="differentTitle"
+            />
+        </section>
         <section id="aboutConsole">
-            <Controls rows={controlsData} />
             <h2 class="text-2xl mt-12 mb-4">
                 NES (Nintendo Entertainment System)
             </h2>

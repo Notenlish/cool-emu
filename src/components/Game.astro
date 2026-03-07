@@ -16,14 +16,17 @@ interface Props {
 const { gameObject, layout } = Astro.props;
 ---
 
-<div class={`min-w-32 flex flex-col items-center grow ${layout == "flex" && "min-w-40"}`}>
+<div
+    class={`min-w-32 flex flex-col items-center grow ${layout == "flex" && "min-w-40"}`}
+>
     <Image
         width={144}
         height={144}
+        class={"aspect-9/16 object-cover"}
         src={gameObject.data.imgPath
             ? `/${gameObject.data.imgPath}`
             : NotFoundImage}
         alt={gameObject.data.name}
     />
-    <span class="text-center block">{gameObject.data.name}</span>
+    <span class="text-center line-clamp-3">{gameObject.data.name}</span>
 </div>
