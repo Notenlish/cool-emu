@@ -9,7 +9,7 @@ import { Button } from "$lib/components/ui/button";
         <h2 class="text-3xl font-bold mb-6">
             Consoles Available for Emulation
         </h2>
-        <div class="grid grid-cols-4 grid-rows-3 gap-6 aspect-[16/9]">
+        <!-- <div class="grid grid-cols-4 grid-rows-3 gap-6 aspect-[16/9]">
             {
                 supportedConsoles.map((e) => {
                     return (
@@ -35,15 +35,16 @@ import { Button } from "$lib/components/ui/button";
                     );
                 })
             }
-        </div>
-        <!-- <div class="flex flex-wrap gap-4">
+        </div> -->
+        <div class="flex flex-wrap gap-4">
             {
                 supportedConsoles.map((e) => {
                     return (
                         <Button
                             variant="link"
+                            size="xl"
                             href={e.playUrl}
-                            class="text-white rounded cursor-pointer flex gap-2 w-fit p-3"
+                            class="text-white rounded cursor-pointer flex gap-2 w-fit p-3 px-4! hover:opacity-70"
                             style={`background-color: ${e.color};`}
                         >
                             <Image
@@ -57,6 +58,6 @@ import { Button } from "$lib/components/ui/button";
                     );
                 })
             }
-        </div> -->
+        </div>
     </div>
 </section>

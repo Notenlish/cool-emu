@@ -11,7 +11,8 @@ interface Props {
 const { gameObject, consoleCategory, layout } = Astro.props;
 ---
 
-<div
+<a
+    href={`/games/${consoleCategory}/${gameObject.id}`}
     class={`min-w-32 flex flex-col items-center grow ${layout == "flex" && "min-w-40"}`}
 >
     <Image
@@ -23,8 +24,7 @@ const { gameObject, consoleCategory, layout } = Astro.props;
             : NotFoundImage}
         alt={gameObject.data.name}
     />
-    <a
-        href={`/games/${consoleCategory}/${gameObject.id}`}
-        class="text-center line-clamp-3">{gameObject.data.name}</a
+    <span class="text-center underline hover:opacity-70 line-clamp-3"
+        >{gameObject.data.name}</span
     >
-</div>
+</a>

@@ -10,7 +10,7 @@ export const supportedConsoles: { id: string, name: string, playUrl: string, des
     { id: "snes", name: "SNES", playUrl: "/play/snes", description: "a.", imgUrl: Controller2, color: "oklch(62.7% 0.194 149.214)", cssClass: "col-span-2" },
     { id: "gameboy", name: "Gameboy", playUrl: "/play/gameboy", description: "gameboy.", imgUrl: Controller3, color: "#94c138", cssClass: "col-span-1 row-span-2" },
     { id: "ps", name: "Playstation", playUrl: "/play/playstation", description: "playstation.", imgUrl: Controller4, color: "oklch(54.6% 0.245 262.881)", cssClass: "col-span-3 row-span-1 row-start-3 col-start-2" },
-    { id: "sega-saturn", name:"Sega Saturn", playUrl: "/play/sega-saturn", description: "description for sega saturn.", imgUrl: Controller4, color: "oklch(54.6% 0.245 262.881)", cssClass: "col-span-3 row-span-1 row-start-3 col-start-2" }
+    { id: "sega-saturn", name: "Sega Saturn", playUrl: "/play/sega-saturn", description: "description for sega saturn.", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "col-span-3 row-span-1 row-start-3 col-start-2" }
 ]
 
 import { type CollectionEntry, getCollection } from "astro:content";
