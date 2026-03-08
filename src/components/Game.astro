@@ -1,19 +1,14 @@
 ---
-import type {
-    CollectionEntry,
-    CollectionKey,
-    ContentCollectionKey,
-    DataCollectionKey,
-    SchemaContext,
-} from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 import NotFoundImage from "$assets/image-not-found.png";
 import Image from "astro/components/Image.astro";
 interface Props {
     gameObject: CollectionEntry<"romgames">;
+    consoleCategory: string;
     layout: "grid" | "flex";
 }
-const { gameObject, layout } = Astro.props;
+const { gameObject, consoleCategory, layout } = Astro.props;
 ---
 
 <div
@@ -28,5 +23,8 @@ const { gameObject, layout } = Astro.props;
             : NotFoundImage}
         alt={gameObject.data.name}
     />
-    <span class="text-center line-clamp-3">{gameObject.data.name}</span>
+    <a
+        href={`/games/${consoleCategory}/${gameObject.id}`}
+        class="text-center line-clamp-3">{gameObject.data.name}</a
+    >
 </div>

@@ -1,0 +1,105 @@
+---
+export const prerender = false; // https://docs.astro.build/en/guides/routing/#on-demand-dynamic-routes
+
+import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
+import Layout from "src/layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+import { getEntry, type CollectionEntry } from "astro:content";
+import NotFoundImage from "$assets/image-not-found.png";
+import { capitaliseWords, unslug } from "$lib/utils";
+import { supportedConsoles } from "$lib/data/consoles";
+import { Button } from "$lib/components/ui/button";
+import DownloadIcon from "$assets/download.svg";
+
+import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
+
+type RomGame = CollectionEntry<"romgames">;
+
+interface Params {
+    console: string;
+    game: string;
+}
+const { console, game } = Astro.params as Params;
+
+const gameObject: RomGame | undefined = await getEntry("romgames", game);
+if (!gameObject) {
+    Astro.response.status = 404;
+    Astro.response.statusText = "Game Not found";
+    //
+    return Astro.rewrite("/404");
+}
+
+const playConsoleMetadata = supportedConsoles.find((e) => e.id == console);
+if (!playConsoleMetadata) {
+    Astro.response.status = 404;
+    Astro.response.statusText = "Console Not found";
+    //
+    return Astro.rewrite("/404");
+}
+// const prettyConsoleName = capitaliseWords(unslug(gameObject.data.category));
+
+const allFeaturedGames = (
+    await getGamesOfConsoleAsEntries(playConsoleMetadata.id)
+)[1];
+---
+
+<Layout>
+    <section id="game" class="mx-auto container pt-[15vh] pb-12">
+        <div class="w-full flex mb-8 content-center justify-between">
+            <h1 class="text-3xl self-center">
+                {gameObject.data.name} For {playConsoleMetadata.name}
+            </h1>
+            <Button
+                variant="link"
+                href={playConsoleMetadata.playUrl}
+                size="lg"
+                class="text-white py-6! rounded cursor-pointer flex gap-2 w-fit p-3 hover:opacity-60"
+                style={`background-color: ${playConsoleMetadata.color};`}
+            >
+                <Image
+                    height={42}
+                    width={42}
+                    src={playConsoleMetadata.imgUrl}
+                    alt="controller"
+                />
+                Play {playConsoleMetadata.name}
+            </Button>
+        </div>
+        <div class="w-full flex space-between gap-4">
+            <Image
+                src={gameObject.data.imgPath
+                    ? `/${gameObject.data.imgPath}`
+                    : NotFoundImage}
+                alt={"asd"}
+                class="rounded"
+                width={256}
+                height={256}
+            />
+            <div>
+                <p>
+                    {gameObject.data.name} ROM Download for {
+                        playConsoleMetadata.name
+                    }. {gameObject.data.name} game is available to play online on
+                    an emulator. You can find the {gameObject.data.name} ROM for {
+                        playConsoleMetadata.name
+                    } download here. {playConsoleMetadata.name} requires an emulator
+                    to play the game.
+                </p>
+                <Button
+                    class="h-14 px-4! flex gap-2 w-fit text-lg bg-rose-500 hover:bg-rose-300"
+                    href={gameObject.data.href}
+                    ><DownloadIcon class="size-8" />Download</Button
+                >
+            </div>
+        </div>
+    </section>
+    <section class="w-full pt-2 pb-12 bg-slate-50">
+        <div class="mx-auto container">
+            <FeaturedGamesOfConsole
+                variant="differentTitle"
+                consoleCategory={playConsoleMetadata.id}
+                romGameArray={allFeaturedGames}
+            />
+        </div>
+    </section>
+</Layout>

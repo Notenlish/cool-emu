@@ -52,7 +52,7 @@ const playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
                     variant="link"
                     href={playConsoleMetadata.playUrl}
                     size="lg"
-                    class="text-white rounded cursor-pointer flex gap-2 w-fit p-3"
+                    class="text-white rounded cursor-pointer flex gap-2 w-fit p-3 hover:opacity-60"
                     style={`background-color: ${playConsoleMetadata.color};`}
                 >
                     <Image
@@ -69,7 +69,12 @@ const playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
             >
                 {
                     romGameArray.map((g) => {
-                        return <Game gameObject={g} />;
+                        return (
+                            <Game
+                                consoleCategory={playConsoleMetadata?.id}
+                                gameObject={g}
+                            />
+                        );
                     })
                 }
             </div>
