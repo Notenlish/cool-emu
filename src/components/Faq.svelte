@@ -32,7 +32,7 @@
                 <p>
                     If it is an older console, it may be because it's more niche
                     and/or the core for it is not available on EmulatorJS. You
-                    can <SimpleLink href="/contact">Contact Us</SimpleLink> in case
+                    can <SimpleLink href="/contact-us">Contact Us</SimpleLink> in case
                     you want to request a spesific console to be added.
                 </p>
             </Accordion.Content>

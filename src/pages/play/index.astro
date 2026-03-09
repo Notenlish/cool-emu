@@ -6,9 +6,11 @@ import { Button } from "$lib/components/ui/button";
 ---
 
 <Layout>
-    <section class="mx-auto container">
-        <h1 class="text-3xl text-center w-full mb-12 mt-24 flex">Play & Emulate Consoles</h1>
-        <div class="flex flex-wrap gap-4">
+    <section class="mx-auto container grow w-full mt-[15vh]">
+        <h1 class="text-3xl text-center w-full mb-12">
+            Play & Emulate Consoles
+        </h1>
+        <div class="flex flex-wrap gap-4 items-center justify-center">
             {
                 supportedConsoles.map((e) => {
                     return (

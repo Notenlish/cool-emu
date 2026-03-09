@@ -1,0 +1,158 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import * as Card from "$lib/components/ui/card/index.js";
+import * as InputGroup from "$lib/components/ui/input-group";
+import * as Label from "$lib/components/ui/label/index.js";
+import { Button } from "$lib/components/ui/button";
+import { actions } from "astro:actions";
+
+const LabelStyles = "w-20 text-slate-700";
+---
+
+<Layout>
+    <section
+        class="w-full grow flex flex-col gap-4 container mx-auto max-w-128 mt-[12vh] mb-auto"
+        id="contact"
+    >
+        <Card.Root>
+            <Card.Header>
+                <Card.Title>Send Contact Request</Card.Title>
+                <Card.Description
+                    >You can contact us through this form.</Card.Description
+                >
+            </Card.Header>
+            <Card.Content>
+                <form
+                    class="flex flex-col gap-2"
+                    id="contactForm"
+                    method="post"
+                >
+                    <InputGroup.Root id="name">
+                        <InputGroup.Input name="name" placeholder="John" />
+                        <InputGroup.Addon>
+                            <Label.Root class={LabelStyles} for="name"
+                                >Name:
+                            </Label.Root>
+                        </InputGroup.Addon>
+                    </InputGroup.Root>
+                    <InputGroup.Root id="lastname">
+                        <InputGroup.Input name="lastname" placeholder="Doe" />
+                        <InputGroup.Addon>
+                            <Label.Root class={LabelStyles} for="name"
+                                >Last Name:
+                            </Label.Root>
+                        </InputGroup.Addon>
+                    </InputGroup.Root>
+                    <InputGroup.Root id="email">
+                        <InputGroup.Input
+                            name="email"
+                            placeholder="abc@xyz.com"
+                        />
+                        <InputGroup.Addon>
+                            <Label.Root class={LabelStyles} for="name"
+                                >Email:
+                            </Label.Root>
+                        </InputGroup.Addon>
+                    </InputGroup.Root>
+                    <InputGroup.Root id="title">
+                        <InputGroup.Input
+                            name="title"
+                            placeholder="Generic Title"
+                        />
+                        <InputGroup.Addon>
+                            <Label.Root class={LabelStyles} for="title"
+                                >Title:
+                            </Label.Root>
+                        </InputGroup.Addon>
+                    </InputGroup.Root>
+                    <InputGroup.Root id="content">
+                        <InputGroup.Textarea
+                            name="content"
+                            placeholder="Enter your message"
+                        />
+                        <InputGroup.Addon align="block-start">
+                            <Label.Root class={LabelStyles} for="content"
+                                >Message:
+                            </Label.Root>
+                        </InputGroup.Addon>
+                    </InputGroup.Root>
+
+                    <Button
+                        id="contactFormButton"
+                        onclick={(event) => {
+                            event.preventDefault();
+                        }}
+                        type="submit"
+                        >Submit
+                    </Button>
+                </form>
+            </Card.Content>
+        </Card.Root>
+        <Card.Root
+            class="bg-green-50 border-green-100 text-green-700 border-2 p-4 flex items-center content-center flex-col"
+            id="statusContainer"
+            style={"display:none;"}
+        >
+            <Card.Header
+                class="grow text-current text-center mx-4 w-full"
+                id="statusHeader">Successfuly sent contact request.</Card.Header
+            >
+            <Card.Description
+                class="text-current text-center"
+                id="statusDescription">Please wait for reply.</Card.Description
+            >
+        </Card.Root>
+    </section>
+</Layout>
+
+<script>
+    import { actions } from "astro:actions";
+
+    const stContainer = document.getElementById(
+        "statusContainer",
+    ) as HTMLElement;
+    const stHeader = document.getElementById("statusHeader") as HTMLElement;
+    const stDescription = document.getElementById(
+        "statusDescription",
+    ) as HTMLElement;
+
+    const e = document.getElementById("contactForm") as HTMLFormElement;
+    const b = document.getElementById("contactFormButton");
+
+    const handleContactRequest = async (event) => {
+        event.preventDefault();
+
+        let form = document.getElementById("contactForm") as HTMLFormElement;
+        let formData = new FormData(form);
+        console.log(event);
+        console.log(form);
+        console.log(formData);
+
+        const { data, error } = await actions.sendContactRequest(formData);
+
+        handleResponse(data, error);
+    };
+
+    const handleResponse = (data, error) => {
+        if (!error) {
+            console.log("Successfully received", data);
+            stContainer.style.display = "block";
+            stContainer.style.backgroundColor = "var(--color-green-50)";
+            stContainer.style.borderColor = "var(--color-green-100)";
+            stContainer.style.color = "var(--color-green-700)";
+            stHeader.textContent = "Successfully sent contact request.";
+            stDescription.textContent =
+                "Please wait for a reply to your contact request.";
+        } else {
+            stContainer.style.display = "block";
+            stContainer.style.backgroundColor = "var(--color-red-50)";
+            stContainer.style.borderColor = "var(--color-red-100)";
+            stContainer.style.color = "var(--color-red-100)";
+            stHeader.textContent =
+                "Ran into an error when sending contact request.";
+            stDescription.textContent = error;
+        }
+    };
+
+    e.addEventListener("submit", handleContactRequest);
+</script>
