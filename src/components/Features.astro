@@ -1,12 +1,77 @@
 ---
-import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import RocketPixelated from "$assets/rocket-pixelated.svg";
+import ControllerPixelated from "$assets/controller-pixelated.svg";
+import RectanglesPixelated from "$assets/rectangles-pixelated.svg";
+import SavePixelated from "$assets/save-pixelated.svg";
+import AtariControllerPixelated from "$assets/atari-controller-pixelated.svg";
+import type { SvgComponent } from "astro/types";
+
+const featuresData: {
+    title: string;
+    content: string;
+    image: SvgComponent & ImageMetadata;
+    bgColor: string;
+    color: string;
+}[] = [
+    {
+        title: "Play Instantly",
+        content:
+            "You can play any classic game directly on your browser. No need to download an emulation program. The emulation works across Windows, MacOS and Linux.",
+        image: RocketPixelated,
+        bgColor: "bg-orange-100/70",
+        color: "text-orange-800",
+    },
+    {
+        title: "Controller Support",
+        content:
+            "Supports most controllers with customizable button mappings. We also have keyboard support for games as well. Just plug in your controller/keyboard and play.",
+        image: ControllerPixelated,
+        bgColor: "bg-red-100/70",
+        color: "text-red-800",
+    },
+    {
+        title: "Multiple Console Support",
+        content:
+            "Play games from various consoles, including but not limited to: Nintendo Entertainment System(NES), Super Nintendo(SNES), Game Boy, Playstation.",
+        image: AtariControllerPixelated,
+        bgColor: "bg-teal-100/70",
+        color: "text-teal-800",
+    },
+    {
+        title: "Save Your State",
+        content:
+            "You can save your game state and export it, so you can come back the next day and continue playing.",
+        image: SavePixelated,
+        bgColor: "bg-purple-100/70",
+        color: "text-purple-800",
+    },
+    // {
+    //     title:"And Much More", content:""
+    // }
+];
 ---
 
-<section id="features" class="pt-8">
+<section id="features" class="pt-16 mb-12">
     <div class="container mx-auto">
         <h2 class="text-3xl w-full text-center font-bold mb-6">Features</h2>
-        <div>
-            Here should be all the features this site has
+        <div class="w-full grid grid-cols-2 gap-4">
+            {
+                featuresData.map((e) => {
+                    const Icon = e.image;
+                    return (
+                        <div
+                            class={`p-4 ${e.bgColor} ${e.color} border-current/50 rounded`}
+                        >
+                            <h3 class="text-xl flex items-center gap-2 mb-4">
+                                <Icon width={36} height={36} />
+                                {e.title}
+                            </h3>
+                            <p>{e.content}</p>
+                        </div>
+                    );
+                })
+            }
         </div>
     </div>
 </section>

@@ -3,7 +3,7 @@
     import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 </script>
 
-<section id="faq" class="container mx-auto mt-12 flex flex-col items-center">
+<section id="faq" class="container mx-auto mt-12 flex flex-col items-center mb-12">
     <h2 class="text-3xl text-center w-full font-bold mb-6">Got a Question?</h2>
     <Accordion.Root type="single" class="w-full sm:max-w-[70%]" value="">
         <Accordion.Item value="item-1">
