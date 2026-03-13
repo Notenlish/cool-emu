@@ -28,7 +28,11 @@ const LabelStyles = "w-20 text-slate-700";
                     method="post"
                 >
                     <InputGroup.Root id="name">
-                        <InputGroup.Input name="name" placeholder="John" />
+                        <InputGroup.Input
+                            minLength="2"
+                            name="name"
+                            placeholder="John"
+                        />
                         <InputGroup.Addon>
                             <Label.Root class={LabelStyles} for="name"
                                 >Name:
@@ -36,7 +40,11 @@ const LabelStyles = "w-20 text-slate-700";
                         </InputGroup.Addon>
                     </InputGroup.Root>
                     <InputGroup.Root id="lastname">
-                        <InputGroup.Input name="lastname" placeholder="Doe" />
+                        <InputGroup.Input
+                            minLength="2"
+                            name="lastname"
+                            placeholder="Doe"
+                        />
                         <InputGroup.Addon>
                             <Label.Root class={LabelStyles} for="name"
                                 >Last Name:
@@ -46,6 +54,7 @@ const LabelStyles = "w-20 text-slate-700";
                     <InputGroup.Root id="email">
                         <InputGroup.Input
                             name="email"
+                            type="email"
                             placeholder="abc@xyz.com"
                         />
                         <InputGroup.Addon>
@@ -124,9 +133,6 @@ const LabelStyles = "w-20 text-slate-700";
 
         let form = document.getElementById("contactForm") as HTMLFormElement;
         let formData = new FormData(form);
-        console.log(event);
-        console.log(form);
-        console.log(formData);
 
         const { data, error } = await actions.sendContactRequest(formData);
 
@@ -147,10 +153,10 @@ const LabelStyles = "w-20 text-slate-700";
             stContainer.style.display = "block";
             stContainer.style.backgroundColor = "var(--color-red-50)";
             stContainer.style.borderColor = "var(--color-red-100)";
-            stContainer.style.color = "var(--color-red-100)";
+            stContainer.style.color = "var(--color-red-700)";
             stHeader.textContent =
                 "Ran into an error when sending contact request.";
-            stDescription.textContent = error;
+            stDescription.textContent = error?.message;
         }
     };
 
