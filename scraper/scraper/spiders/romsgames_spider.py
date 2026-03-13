@@ -16,7 +16,21 @@ class RomsGamesSpider(scrapy.Spider):
             pathlib.Path("gameimages").mkdir()
 
         urls = [
-            "https://www.romsgames.net/roms/sega-saturn/?page=1&sort=popularity",  # if I use just /roms/sega-saturn then results from page 1 get duplicated.
+            # if I use just /roms/[console] then results from page 1 get duplicated. The page and sort args need to be kept.
+            "https://www.romsgames.net/roms/nintendo/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/super-nintendo/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/gameboy/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/gameboy-advance/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/nintendo-ds/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/atari-5200-supersystem/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/playstation/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/atari-jaguar/?page=1&sort=popularity",
+            "https://emulatorjs.org/docs/systems/atari-lynx?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/sega-saturn/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/nintendo-64/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/atari-2600/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/amiga-500/?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/playstation-portable/?page=1&sort=popularity",
         ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)

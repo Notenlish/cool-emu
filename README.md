@@ -1,5 +1,8 @@
 # Astro Starter Kit: Basics
 
+## build
+dont forget to check if the js files of emulator.js are minified. run `npm run build`.
+
 ## scraping
 cd scraper
 scrapy crawl romsgames -o roms.json
