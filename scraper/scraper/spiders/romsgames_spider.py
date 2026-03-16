@@ -25,7 +25,7 @@ class RomsGamesSpider(scrapy.Spider):
             "https://www.romsgames.net/roms/atari-5200-supersystem/?page=1&sort=popularity",
             "https://www.romsgames.net/roms/playstation/?page=1&sort=popularity",
             "https://www.romsgames.net/roms/atari-jaguar/?page=1&sort=popularity",
-            "https://emulatorjs.org/docs/systems/atari-lynx?page=1&sort=popularity",
+            "https://www.romsgames.net/roms/atari-lynx/?page=1&sort=popularity",
             "https://www.romsgames.net/roms/sega-saturn/?page=1&sort=popularity",
             "https://www.romsgames.net/roms/nintendo-64/?page=1&sort=popularity",
             "https://www.romsgames.net/roms/atari-2600/?page=1&sort=popularity",

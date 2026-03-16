@@ -1,39 +1,57 @@
 ---
-
+//
 ---
 
-<section id="hero" class="mt-[15vh] grid place-content-center mb-24">
-    <div class="container mx-auto grid place-content-center relative">
-        <div class="h-0">
+<section
+    id="hero"
+    class="mt-[15vh] md:grid place-content-center mb-24 w-full px-2 relative overflow-x-clip"
+>
+    <div
+        class="md:container md:mx-auto md:grid md:place-content-center static w-full"
+    >
+        <div class="h-0 sm:block hidden">
             <img
                 src="/trophy-pixelated.svg"
                 alt="trophy"
-                class="hover top-1/4 -left-2/10 size-12 opacity-60"
+                class="hover left-1/14 -top-1/6 lg:top-1/4 size-8 md:size-12 opacity-60"
             />
             <img
                 src="/archery-pixelated.svg"
                 alt="trophy"
-                class="absolute -bottom-1/8 -left-1/12 size-12 opacity-60 animate-[hoverAnim_0.76s_ease-in-out_0.3s_infinite_alternate]"
+                class="absolute left-1/9 bottom-3/5 lg:bottom-1/9 size-8 md:size-12 opacity-60 animate-[hoverAnim_0.76s_ease-in-out_0.3s_infinite_alternate]"
             />
             <img
                 src="/star-pixelated.svg"
                 alt="Pixelated Controller"
-                class="absolute top-3/6 -right-34 size-12 opacity-60 animate-[hoverAnim_1.6s_ease-in-out_0.2s_infinite_alternate]"
+                class="absolute top-2/6 lg:top-3/6 right-1/7 lg:right-1/8 size-8 md:size-12 opacity-60 animate-[hoverAnim_1.6s_ease-in-out_0.2s_infinite_alternate]"
             />
             <img
                 src="/sword-pixelated.svg"
                 alt="Pixelated Sword"
-                class="rotate-180 absolute -top-1/8 right-24 size-12 opacity-60 animate-[hoverAnim_1.8s_ease-in-out_0.1s_infinite_alternate]"
+                class="rotate-180 absolute -top-1/10 lg:top-1/8 right-24 size-8 md:size-12 opacity-60 animate-[hoverAnim_1.8s_ease-in-out_0.1s_infinite_alternate]"
             />
         </div>
-        <div class="flex flex-col items-center">
-            <div class="mb-8">
-                <h1 class="text-4xl font-medium w-full text-center px-32">
+        <div class="flex flex-col items-center w-full">
+            <div class="mb-16 lg:mb-12 w-full">
+                <h1
+                    class="text-2xl md:text-3xl lg:text-4xl font-medium w-full text-center px-0 md:px-16 lg:px-32"
+                >
                     <span class="text-yellow-500 font-bold">Cool Emu</span>
-                    is a web based <br />
-                    <div class="flex gap-2">
-                        console emulator for
-                        <div class="min-w-2 font-bold" id="text-rotator">
+                    <span>is</span>
+                    <span>a</span>
+                    <span>web</span>
+                    <span>based</span>
+                    <br />
+                    <div
+                        class="flex gap-2 w-full flex-wrap justify-center md:flex-nowrap"
+                    >
+                        <span>console</span>
+                        <span>emulator</span>
+                        <span>for</span>
+                        <div
+                            class="min-w-10 font-bold select-none"
+                            id="text-rotator"
+                        >
                             <span class="text-blue-600">NES</span>
                             <span class="text-green-600">SNES</span>
                             <span class="text-blue-600">Playstation</span>
@@ -41,11 +59,13 @@
                         </div>
                     </div>
                 </h1>
-                <h2 class="text-center opacity-70 text-lg text-primary">
+                <h2
+                    class="text-center opacity-70 text-sm md:text-lg text-primary"
+                >
                     Currently supporting emulation of 2+ game consoles.
                 </h2>
             </div>
-            <p>
+            <p class="text-wrap w-full">
                 Welcome to <strong>Cool Emu</strong>, a web based console
                 emulator! On this site you can play all sorts of games from NES
                 classics such as Super Mario Bros to PSP games like Patapon! All

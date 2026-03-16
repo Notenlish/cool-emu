@@ -4,9 +4,9 @@ import Image from "astro/components/Image.astro";
 import { Button } from "$lib/components/ui/button";
 ---
 
-<section id="consoleList" class="bg-slate-50 pt-16 pb-16">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-6">
+<section id="consoleList" class="bg-slate-50 pt-16 pb-16 sm:px-0 px-2">
+    <div class="sm:container sm:mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-6">
             Consoles Available for Emulation
         </h2>
         <!-- <div class="grid grid-cols-4 grid-rows-3 gap-6 aspect-[16/9]">
@@ -36,7 +36,7 @@ import { Button } from "$lib/components/ui/button";
                 })
             }
         </div> -->
-        <div class="flex flex-wrap gap-4">
+        <div class="flex flex-wrap gap-2 sm:gap-4">
             {
                 supportedConsoles.map((e) => {
                     return (
@@ -44,7 +44,7 @@ import { Button } from "$lib/components/ui/button";
                             variant="link"
                             size="xl"
                             href={e.playUrl}
-                            class="text-white rounded cursor-pointer flex gap-2 w-fit p-3 px-4! hover:opacity-70"
+                            class="text-white rounded cursor-pointer flex gap-2 w-fit p-2 sm:p-3 px-2! py-2! text-sm sm:text-lg sm:px-4! hover:opacity-70"
                             style={`background-color: ${e.color};`}
                         >
                             <Image

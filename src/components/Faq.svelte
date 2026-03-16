@@ -3,8 +3,8 @@
     import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 </script>
 
-<section id="faq" class="container mx-auto mt-12 flex flex-col items-center mb-12">
-    <h2 class="text-3xl text-center w-full font-bold mb-6">Got a Question?</h2>
+<section id="faq" class="sm:container sm:mx-auto px-2 mt-12 flex flex-col items-center mb-8 sm:mb-12">
+    <h2 class="text-2xl sm:text-3xl text-center w-full font-bold mb-6">Got a Question?</h2>
     <Accordion.Root type="single" class="w-full sm:max-w-[70%]" value="">
         <Accordion.Item value="item-1">
             <Accordion.Trigger>How does this work?</Accordion.Trigger>
