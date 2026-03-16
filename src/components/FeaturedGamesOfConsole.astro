@@ -13,11 +13,11 @@ interface Props {
 }
 const { consoleCategory, romGameArray, variant = "default" } = Astro.props;
 
-let romGamesToUse = romGameArray.slice(0, 50);
+let romGamesToUse = romGameArray.slice(0, 20);
 let consoleTitle = capitaliseWords(unslug(consoleCategory));
 ---
 
-<div class="w-full">
+<div class="w-full sm:px-4 rounded px-2 even:bg-transparent bg-slate-100/80 py-4 sm:py-6">
     <div>
         {
             variant == "default" ? (
@@ -41,9 +41,7 @@ let consoleTitle = capitaliseWords(unslug(consoleCategory));
                         <SimpleLink href={`/games/${consoleCategory}`}>
                             {consoleTitle}
                             <NewLinkArrow
-                                class={
-                                    "inline-block -translate-y-2"
-                                }
+                                class={"inline-block -translate-y-2"}
                                 width={24}
                                 height={24}
                             />
@@ -52,10 +50,18 @@ let consoleTitle = capitaliseWords(unslug(consoleCategory));
                 </div>
             )
         }
-        <div class="flex gap-4 overflow-x-scroll">
+        <div
+            class="grid grid-cols-2 sm:grid-cols-3 md:flex gap-4 overflow-x-scroll"
+        >
             {
                 romGamesToUse.map((g) => {
-                    return <Game consoleCategory={consoleCategory} layout="flex" gameObject={g} />;
+                    return (
+                        <Game
+                            consoleCategory={consoleCategory}
+                            layout="flex"
+                            gameObject={g}
+                        />
+                    );
                 })
             }
         </div>

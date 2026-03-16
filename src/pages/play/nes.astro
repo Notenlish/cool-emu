@@ -5,6 +5,7 @@ import Image from "astro/components/Image.astro";
 import NesConsoleImage from "$assets/consoles/NES-Console-Set.png";
 import Controls from "src/components/Controls.astro";
 import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
+import AboutConsole from "src/components/aboutConsole.astro";
 
 import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
 import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
@@ -28,64 +29,53 @@ const controlsData = [
 ---
 
 <Layout>
-    <div class="container mx-auto mt-12 pb-12">
-        <PlayConsole
-            title="NES"
-            description="You can play any NES game by uploading the game's ROM file here. Bios file optional."
-            aspectRatioTailwind="aspect-[4/3]"
-            core="nes"
+    <PlayConsole
+        title="NES"
+        description="You can play any NES game by uploading the game's ROM file here. Bios file optional."
+        aspectRatioTailwind="aspect-[4/3]"
+        core="nes"
+    />
+    <Controls rows={controlsData} />
+    <section id="featuredGames" class="mx-auto container">
+        <FeaturedGamesOfConsole
+            romGameArray={gamesToMap[1]}
+            consoleCategory={gamesToMap[0]}
+            variant="differentTitle"
         />
-        <Controls rows={controlsData} />
-        <section id="featuredGames">
-            <FeaturedGamesOfConsole
-                romGameArray={gamesToMap[1]}
-                consoleCategory={gamesToMap[0]}
-                variant="differentTitle"
-            />
-        </section>
-        <section id="aboutConsole">
-            <h2 class="text-2xl mt-12 mb-4">
-                NES (Nintendo Entertainment System)
-            </h2>
-            <div class="flex gap-4">
-                <Image
-                    src={NesConsoleImage}
-                    alt="nes console image"
-                    width={320}
-                    height={180}
-                    class="aspect-video h-fit"
-                />
-                <p>
-                    Nintendo Entertainment System(NES) is a video game console
-                    developed by Nintendo. Even though it is known as Nintendo
-                    Entertainment System globally, it was released under the
-                    name "Family Computer(Famicom)" in Japan on <time
-                        datetime="1983-7-15">15th of July 1983</time
-                    >. NES was launched in the US on <time datetime="1986-9-27"
-                        >September 27, 1986</time
-                    >. Nintendo Entertainment System competed with the Master
-                    System by Sega.
-                    <br />
-                    The hardware of the NES was based on the 1981 arcade game called
-                    "Donkey Kong" which was released by Nintendo. Because Nintendo
-                    released the NES system after the video game crash of 1983, NES
-                    was quickly able to dominate the market and it successfully made
-                    Nintendo a monopoly in the home console market.
-                </p>
-            </div>
-            <div class="">
-                NES image by
-                <SimpleLink
-                    target="_blank"
-                    href="//commons.wikimedia.org/wiki/User:Evan-Amos"
-                    >Evan-Amos</SimpleLink
-                > - <span class="int-own-work" lang="en">Own work</span>, Public
-                Domain, <SimpleLink
-                    target="_blank"
-                    href="https://commons.wikimedia.org/w/index.php?curid=11408831"
-                    >Link</SimpleLink
-                >
-            </div>
-        </section>
-    </div>
+    </section>
+    <AboutConsole
+        title="NES (Nintendo Entertainment System)"
+        NesConsoleImage={NesConsoleImage}
+    >
+        <p slot="description">
+            Nintendo Entertainment System(NES) is a video game console developed
+            by Nintendo. Even though it is known as Nintendo Entertainment
+            System globally, it was released under the name "Family
+            Computer(Famicom)" in Japan on <time datetime="1983-7-15"
+                >15th of July 1983</time
+            >. NES was launched in the US on <time datetime="1986-9-27"
+                >September 27, 1986</time
+            >. Nintendo Entertainment System competed with the Master System by
+            Sega.
+            <br />
+            The hardware of the NES was based on the 1981 arcade game called "Donkey
+            Kong" which was released by Nintendo. Because Nintendo released the NES
+            system after the video game crash of 1983, NES was quickly able to dominate
+            the market and it successfully made Nintendo a monopoly in the home console
+            market.
+        </p>
+        <div slot="attribution">
+            NES image by
+            <SimpleLink
+                target="_blank"
+                href="//commons.wikimedia.org/wiki/User:Evan-Amos"
+                >Evan-Amos</SimpleLink
+            > - <span class="int-own-work" lang="en">Own work</span>, Public
+            Domain, <SimpleLink
+                target="_blank"
+                href="https://commons.wikimedia.org/w/index.php?curid=11408831"
+                >Link</SimpleLink
+            >
+        </div>
+    </AboutConsole>
 </Layout>

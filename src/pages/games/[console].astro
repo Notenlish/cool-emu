@@ -42,10 +42,12 @@ const playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
 ---
 
 <Layout>
-    <div class="w-full container mx-auto pt-[15vh]">
+    <div class="w-full sm:container sm:mx-auto px-2 pt-[15vh]">
         <div>
-            <div class="w-full flex justify-between">
-                <h2 class="text-3xl mb-6">
+            <div
+                class="w-full flex flex-col lg:flex-row lg:gap-2 mb-4 justify-between"
+            >
+                <h2 class="text-3xl sm:mx-0! sm:m-2! mb-6">
                     Find Games for {capitaliseWords(unslug(key))}
                 </h2>
                 <Button
@@ -65,7 +67,7 @@ const playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
                 </Button>
             </div>
             <div
-                class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]"
+                class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(160px,1fr))]"
             >
                 {
                     romGameArray.map((g) => {

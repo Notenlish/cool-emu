@@ -44,9 +44,9 @@ const allFeaturedGames = (
 ---
 
 <Layout>
-    <section id="game" class="mx-auto container pt-[15vh] pb-12">
-        <div class="w-full flex mb-8 content-center justify-between">
-            <h1 class="text-3xl self-center">
+    <section id="game" class="sm:mx-auto sm:container px-2 sm:px-0 pt-[15vh] pb-12">
+        <div class="w-full flex sm:flex-row flex-col mb-8 content-center justify-between">
+            <h1 class="text-3xl sm:self-center sm:mb-0 mb-2">
                 {gameObject.data.name} ROM For {playConsoleMetadata.name}
             </h1>
             <Button
@@ -65,13 +65,13 @@ const allFeaturedGames = (
                 Play {playConsoleMetadata.name}
             </Button>
         </div>
-        <div class="w-full flex space-between gap-4">
+        <div class="w-full flex space-between gap-4 flex-col xs:flex-row">
             <Image
                 src={gameObject.data.imgPath
                     ? `/${gameObject.data.imgPath}`
                     : NotFoundImage}
                 alt={"asd"}
-                class="rounded"
+                class="rounded sm:w-64 w-40 object-cover"
                 width={256}
                 height={256}
             />

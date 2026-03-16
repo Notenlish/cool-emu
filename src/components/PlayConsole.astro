@@ -16,53 +16,56 @@ interface Props {
 const { title, description, core, aspectRatioTailwind } = Astro.props;
 ---
 
-<h1 class="text-3xl font-bold mb-6">
-    Play {title} Games using Emulation
-</h1>
-<p>{description}</p>
+<div class="sm:container sm:mx-auto px-2 sm:px-0 mt-12">
+    <h1 class="text-3xl font-bold mb-6">
+        Play {title} Games using Emulation
+    </h1>
+    <p>{description}</p>
 
-<div
-    id="enterGameData"
-    class="flex flex-col w-full items-start gap-1.5 mb-12 max-w-200"
->
-    <Label class={"text-base"} for="biosInput">Enter BIOS File(Optional):</Label
+    <div
+        id="enterGameData"
+        class="flex flex-col w-full items-start gap-1.5 mb-12 max-w-200"
     >
-    <InputGroup.Root class="mb-2">
-        <InputGroup.Input class="leading-6" id="biosInput" type="file" />
-        <InputGroup.Addon
-            class={"p-0 m-0 w-12 h-12 min-w-12 size-12 text-black"}
+        <Label class={"text-base"} for="biosInput"
+            >Enter BIOS File(Optional):</Label
         >
-            <GearIcon width={64} height={64} class={"size-8"} />
-        </InputGroup.Addon>
-    </InputGroup.Root>
-    <Label
-        id="fileDrop"
-        class={`text-base cursor-pointer w-full flex flex-col justify-center border-2 border-dashed border-olive-400 bg-neutral-100 rounded ${aspectRatioTailwind}`}
-        for="romInput"
-    >
-        <div class="flex gap-2 w-full items-center justify-center">
-            <InputGroup.Addon class={"p-0 m-0 size-12 text-black"}>
-                <SaveIcon width={64} height={64} class={"size-8"} />
+        <InputGroup.Root class="mb-2">
+            <InputGroup.Input class="leading-6" id="biosInput" type="file" />
+            <InputGroup.Addon
+                class={"p-0 m-0 w-12 h-12 min-w-12 size-12 text-black"}
+            >
+                <GearIcon width={64} height={64} class={"size-8"} />
             </InputGroup.Addon>
-            <span class="w-fit h-min">Enter Game File:</span>
-            <Input
-                class={`leading-6 max-w-60`}
-                id="romInput"
-                type="file"
-                required
-            />
-        </div>
-    </Label>
-</div>
+        </InputGroup.Root>
+        <Label
+            id="fileDrop"
+            class={`text-base cursor-pointer w-full flex flex-col justify-center border-2 border-dashed border-olive-400 bg-neutral-100 rounded ${aspectRatioTailwind}`}
+            for="romInput"
+        >
+            <div class="flex flex-col sm:flex-row gap-2 w-full items-center justify-center">
+                <InputGroup.Addon class={"p-0 m-0 size-12 text-black"}>
+                    <SaveIcon width={64} height={64} class={"size-8"} />
+                </InputGroup.Addon>
+                <span class="w-fit h-min">Enter Game File:</span>
+                <Input
+                    class={`leading-6 max-w-60`}
+                    id="romInput"
+                    type="file"
+                    required
+                />
+            </div>
+        </Label>
+    </div>
 
-<div
-    id="gameContainer"
-    style="width:640px;height:480px;max-width:100%;display:none;"
->
-    <div id="game"></div>
-</div>
+    <div
+        id="gameContainer"
+        style="width:640px;height:480px;max-width:100%;display:none;"
+    >
+        <div id="game"></div>
+    </div>
 
-<div id="data-emulator" data-core={core}></div>
+    <div id="data-emulator" data-core={core}></div>
+</div>
 <script type="text/javascript">
     const input = document.getElementById("romInput");
     const biosInput = document.getElementById("biosInput");
