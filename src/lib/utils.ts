@@ -18,6 +18,6 @@ export function unslug(a: string) {
 }
 
 export function capitaliseWords(a: string) {
-	let words = a.split(" ")
-	return words.reduce((accumulated, cur) => `${accumulated[0].toUpperCase()}${accumulated.slice(1)}` + ` ${cur[0].toUpperCase()}${cur.slice(1)} `).trim()
+	let words = a.trim().split(" ")
+	return words.map((e) => `${e[0].toUpperCase()}${e.slice(1)}`).join(" ")
 }

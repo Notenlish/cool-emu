@@ -12,6 +12,45 @@ export const getStaticPaths = (() => {
         {
             params: { console: "sega-saturn" },
         },
+        {
+            params: { console: "nintendo" },
+        },
+        {
+            params: { console: "super-nintendo" },
+        },
+        {
+            params: { console: "gameboy" },
+        },
+        {
+            params: { console: "gameboy-advance" },
+        },
+        {
+            params: { console: "nintendo-ds" },
+        },
+        {
+            params: { console: "atari-5200-supersystem" },
+        },
+        {
+            params: { console: "playstation" },
+        },
+        {
+            params: { console: "atari-jaguar" },
+        },
+        {
+            params: { console: "atari-lynx" },
+        },
+        {
+            params: { console: "nintendo-64" },
+        },
+        {
+            params: { console: "atari-2600" },
+        },
+        {
+            params: { console: "amiga-500" },
+        },
+        {
+            params: { console: "playstation-portable" },
+        },
     ];
 }) satisfies GetStaticPaths;
 const { console } = Astro.params;
@@ -38,7 +77,10 @@ const romGameArray = romGamesByConsoles[console];
 
 //
 
-const playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
+let playConsoleMetadata = supportedConsoles.find((e) => e.id == key);
+if (!playConsoleMetadata) {
+    playConsoleMetadata = supportedConsoles.find((e) => e.alternativeId == key);
+}
 ---
 
 <Layout>

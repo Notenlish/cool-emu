@@ -7,6 +7,15 @@ dont forget to check if the js files of emulator.js are minified. run `npm run b
 cd scraper
 scrapy crawl romsgames -o roms.json
 
+you then need to move the roms.json from scraper to src/data/
+
+and also copy over all the public static images from scraper/gameimages/ to public/gameimages/
+
+oh and you need to add the consoles to the getStaticPaths in src/pages/games/[console].astro
+why? idk honestly.
+
+note: src/data/roms.json is gitignored bcuz its too big.
+
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
