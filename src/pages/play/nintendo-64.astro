@@ -1,15 +1,14 @@
 ---
 import PlayConsole from "src/components/PlayConsole.astro";
 import Layout from "src/layouts/Layout.astro";
-import Image from "astro/components/Image.astro";
-import SnesConsoleImage from "$assets/consoles/snes.jpg";
+import N64ConsoleImage from "$assets/consoles/n64.png";
 import Controls from "src/components/Controls.astro";
 import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 import AboutConsole from "src/components/aboutConsole.astro";
 
 import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
 import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
-const gamesToMap = await getGamesOfConsoleAsEntries("super-nintendo");
+const gamesToMap = await getGamesOfConsoleAsEntries("nintendo-64");
 
 const controlsData = [
     { name: "Button A", key: "Z" },
@@ -30,10 +29,10 @@ const controlsData = [
 
 <Layout>
     <PlayConsole
-        title="SNES"
-        description="You can play any SNES game by uploading the game's ROM file here. Bios file optional."
+        title="Nintendo 64"
+        description="You can play any Nintendo 64 game by uploading the game's ROM file here. Bios file optional."
         aspectRatioTailwind="aspect-[4/3]"
-        core="snes"
+        core="n64"
     />
     <Controls rows={controlsData} />
     <section id="featuredGames" class="mx-auto container">
@@ -43,27 +42,25 @@ const controlsData = [
             variant="differentTitle"
         />
     </section>
-    <AboutConsole
-        title="SNES (Super Nintendo Entertainment System)"
-        NesConsoleImage={SnesConsoleImage}
-    >
+    <AboutConsole title="Nintendo 64 (N64)" NesConsoleImage={N64ConsoleImage}>
         <p slot="description">
-            Super Nintendo Entertainment System(SNES) is a video game console
-            developed by Nintendo. It was released under the name "Super
-            Famicom" in Japan on <time datetime="1990-11-21"
-                >21st of November 1990</time
-            >. It was released in the US on <time datetime="1991-8-23"
-                >August 23, 1991</time
-            >. SNES was the second home console sold by Nintendo and it
-            primarily competed with Sega's Genesis at the time.
+            Nintendo 64 (N64) is a video game console developed and sold by
+            Nintendo. It was released in Japan on <time datetime="1996-6-23"
+                >23rd of June 1996</time
+            >. It was released in the US on <time datetime="1996-9-23"
+                >September 29, 1996</time
+            >. N64 was Nintendo's third major game console and competed with
+            Sony's Playstation and Sega Saturn as the fifth generation of
+            consoles.
             <br />
-            The hardware of the NES was a 16 bit architecture that was developed as
-            a response to the introduction of Genesis and Turbografx-16. It had a
-            wide range of features such as being able to simulate 3D perspective and
-            interfacing with enhancement chips such as SuperFx within game cartridges.
+            The hardware of the Nintendo 64 was a 64 bit architecture co-developed
+            with Silicon Graphics. The coprocessor found on the device for processing
+            graphics allowed for improved 3D capabilities. While N64 was a successful
+            console and outsold the Sega Saturn, it was less successful than Playstation.
+            N64 is regarded as one of the most iconic game consoles of all time.
         </p>
         <div slot="attribution">
-            SNES image by
+            Nintendo 64 image by
             <SimpleLink
                 target="_blank"
                 href="//commons.wikimedia.org/wiki/User:Evan-Amos"
@@ -71,7 +68,7 @@ const controlsData = [
             > - <span class="int-own-work" lang="en">Own work</span>, Public
             Domain, <SimpleLink
                 target="_blank"
-                href="https://commons.wikimedia.org/w/index.php?curid=17748368"
+                href="https://commons.wikimedia.org/w/index.php?curid=12814248"
                 >Link</SimpleLink
             >
         </div>
