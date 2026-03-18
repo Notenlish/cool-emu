@@ -1,0 +1,23 @@
+---
+import { Button } from "$lib/components/ui/button";
+interface Props {
+    curPage: number;
+    offset: number;
+    url: string;
+    maxPage: number;
+    minPage: number;
+}
+const { curPage, offset, url, maxPage, minPage } = Astro.props;
+
+const newPage = curPage + offset;
+// /games/${console}
+const possible = newPage >= minPage && newPage < maxPage;
+---
+
+{
+    possible && (
+        <Button type="button" href={`${url}/${newPage}`}>
+            Page {newPage}
+        </Button>
+    )
+}

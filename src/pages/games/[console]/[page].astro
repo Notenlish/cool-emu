@@ -1,0 +1,166 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import { Button } from "$lib/components/ui/button";
+import Image from "astro/components/Image.astro";
+import Game from "src/components/Game.astro";
+import PaginationButton from "src/components/paginationButton.astro";
+
+import { unslug, capitaliseWords } from "$lib/utils";
+
+import type { GetStaticPaths } from "astro";
+import { getEntry, type CollectionEntry } from "astro:content";
+import {
+    getGamesOfConsoleAsEntries,
+    supportedConsoles,
+} from "$lib/data/consoles";
+
+type RomGame = CollectionEntry<"romgames">;
+
+const gamesPerPage = 20;
+export const getStaticPaths = (async () => {
+    const gamesPerPage = 20;  // needed, because it causes problems if I dont.
+    let combinations = await Promise.all(
+        supportedConsoles.map(async (e) => {
+            let arr = [];
+            const allGamesOfConsole = (
+                await getGamesOfConsoleAsEntries(e.id)
+            )?.[1];
+            const howManyPagesTotal = Math.ceil(
+                allGamesOfConsole.length / gamesPerPage,
+            );
+
+            for (let i = 0; i < howManyPagesTotal; i++) {
+                // const gamesOfPage = allGamesOfConsole?.slice(i * gamesPerPage, (i + 1) * gamesPerPage);
+                arr.push({
+                    params: {
+                        console: e.id,
+                        page: `${i}`,
+                    },
+                });
+            }
+
+            return arr;
+        }),
+    );
+    return combinations.flat();
+}) satisfies GetStaticPaths;
+
+interface Params {
+    console: string;
+    page: string;
+}
+const { console, page } = Astro.params as Params;
+const pageInt = Number.parseInt(page);
+const gamesOfPage = (await getGamesOfConsoleAsEntries(console))?.[1].slice(
+    pageInt * gamesPerPage,
+    (pageInt + 1) * gamesPerPage,
+);
+
+let playConsoleMetadata = supportedConsoles.find((e) => e.id == console);
+
+const allGamesOfConsole = (await getGamesOfConsoleAsEntries(console))?.[1];
+const howManyPagesTotal = Math.ceil(allGamesOfConsole.length / gamesPerPage);
+---
+
+<Layout>
+    <div class="w-full sm:container sm:mx-auto px-2 pt-[15vh]">
+        <div>
+            <div
+                class="w-full flex flex-col lg:flex-row lg:gap-2 mb-4 justify-between"
+            >
+                <h2 class="text-3xl sm:mx-0! sm:m-2! mb-6">
+                    Find Games for {capitaliseWords(unslug(console))} Page {
+                        page
+                    }
+                </h2>
+                <Button
+                    variant="link"
+                    href={playConsoleMetadata?.playUrl}
+                    size="lg"
+                    class="text-white rounded cursor-pointer flex gap-2 w-fit p-3 hover:opacity-60"
+                    style={`background-color: ${playConsoleMetadata?.color};`}
+                >
+                    <Image
+                        height={42}
+                        width={42}
+                        src={playConsoleMetadata?.imgUrl}
+                        alt="controller"
+                    />
+                    Play {playConsoleMetadata?.name}
+                </Button>
+            </div>
+            <div
+                class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(160px,1fr))]"
+            >
+                {
+                    gamesOfPage?.map((g) => {
+                        return (
+                            <Game
+                                consoleCategory={playConsoleMetadata?.id}
+                                gameObject={g}
+                            />
+                        );
+                    })
+                }
+            </div>
+            <div class="mt-12">
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={-howManyPagesTotal + 1}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={-25}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={-5}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={-1}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={1}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={5}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={25}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+                <PaginationButton
+                    curPage={pageInt}
+                    offset={howManyPagesTotal - 1}
+                    url={`/games/${console}`}
+                    maxPage={howManyPagesTotal}
+                    minPage={0}
+                />
+            </div>
+        </div>
+    </div>
+</Layout>
