@@ -13,7 +13,7 @@ export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
 
 export function unslug(a: string) {
-	let o = a.replace("-", " ")
+	let o = a.replace("-", " ").replace("-", " ")
 	return o.trim()
 }
 

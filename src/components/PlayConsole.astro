@@ -6,6 +6,9 @@ import GearIcon from "$assets/gear.svg";
 import Image from "astro/components/Image.astro";
 import { Input } from "$lib/components/ui/input";
 import * as InputGroup from "$lib/components/ui/input-group/index.js";
+
+import SimpleCrumbs from "src/components/SimpleCrumbs.svelte";
+
 interface Props {
     title: string;
     description: string;
@@ -17,6 +20,12 @@ const { title, description, core, aspectRatioTailwind } = Astro.props;
 ---
 
 <div class="sm:container sm:mx-auto px-2 sm:px-0 mt-12">
+    <SimpleCrumbs
+        crumbs={[
+            { text: "Home", link: "/" },
+            { text: "Play", link: "/play" },
+        ]}
+    />
     <h1 class="text-3xl font-bold mb-6">
         Play {title} Games using Emulation
     </h1>
@@ -42,7 +51,9 @@ const { title, description, core, aspectRatioTailwind } = Astro.props;
             class={`text-base cursor-pointer w-full flex flex-col justify-center border-2 border-dashed border-olive-400 bg-neutral-100 rounded ${aspectRatioTailwind}`}
             for="romInput"
         >
-            <div class="flex flex-col sm:flex-row gap-2 w-full items-center justify-center">
+            <div
+                class="flex flex-col sm:flex-row gap-2 w-full items-center justify-center"
+            >
                 <InputGroup.Addon class={"p-0 m-0 size-12 text-black"}>
                     <SaveIcon width={64} height={64} class={"size-8"} />
                 </InputGroup.Addon>

@@ -12,6 +12,8 @@ import { Button } from "$lib/components/ui/button";
 import DownloadIcon from "$assets/download.svg";
 
 import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
+import SimpleCrumbs from "src/components/SimpleCrumbs.svelte";
+
 
 type RomGame = CollectionEntry<"romgames">;
 
@@ -44,8 +46,20 @@ const allFeaturedGames = (
 ---
 
 <Layout>
-    <section id="game" class="sm:mx-auto sm:container px-2 sm:px-0 pt-[15vh] pb-12">
-        <div class="w-full flex sm:flex-row flex-col mb-8 content-center justify-between">
+    <section
+        id="game"
+        class="sm:mx-auto sm:container px-2 sm:px-0 pt-[15vh] pb-12"
+    >
+        <SimpleCrumbs
+            crumbs={[
+                { text: "Home", link: "/" },
+                { text: "Games", link: "/games" },
+                { text: `${playConsoleMetadata.name} Games`, link: `/games/${console}/0` },
+            ]}
+        />
+        <div
+            class="w-full flex sm:flex-row flex-col mb-8 content-center justify-between"
+        >
             <h1 class="text-3xl sm:self-center sm:mb-0 mb-2">
                 {gameObject.data.name} ROM For {playConsoleMetadata.name}
             </h1>

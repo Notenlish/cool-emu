@@ -7,6 +7,8 @@ import { Button } from "$lib/components/ui/button";
 import Image from "astro/components/Image.astro";
 import { supportedConsoles } from "$lib/data/consoles";
 
+
+
 export const getStaticPaths = (() => {
     return [
         {

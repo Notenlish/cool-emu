@@ -14,11 +14,13 @@ import {
     supportedConsoles,
 } from "$lib/data/consoles";
 
+import SimpleCrumbs from "src/components/SimpleCrumbs.svelte";
+
 type RomGame = CollectionEntry<"romgames">;
 
 const gamesPerPage = 20;
 export const getStaticPaths = (async () => {
-    const gamesPerPage = 20;  // needed, because it causes problems if I dont.
+    const gamesPerPage = 20; // needed, because it causes problems if I dont.
     let combinations = await Promise.all(
         supportedConsoles.map(async (e) => {
             let arr = [];
@@ -60,18 +62,33 @@ let playConsoleMetadata = supportedConsoles.find((e) => e.id == console);
 
 const allGamesOfConsole = (await getGamesOfConsoleAsEntries(console))?.[1];
 const howManyPagesTotal = Math.ceil(allGamesOfConsole.length / gamesPerPage);
+
+const betterNames = (e) => {
+    if (e == "Nintendo") return "Nintendo (NES)";
+    if (e == "Super Nintendo") return "Super Nintendo (SNES)";
+    if (e == "Gameboy") return "Gameboy (GB)";
+    if (e == "Gameboy Advance") return "Gameboy Advance (GBA)";
+    if (e == "Nintendo Ds") return "Nintendo DS";
+    else return e;
+};
 ---
 
 <Layout>
     <div class="w-full sm:container sm:mx-auto px-2 pt-[15vh]">
+        <SimpleCrumbs
+            crumbs={[
+                { text: "Home", link: "/" },
+                { text: "Games", link: "/games" },
+            ]}
+        />
         <div>
             <div
                 class="w-full flex flex-col lg:flex-row lg:gap-2 mb-4 justify-between"
             >
                 <h2 class="text-3xl sm:mx-0! sm:m-2! mb-6">
-                    Find Games for {capitaliseWords(unslug(console))} Page {
-                        page
-                    }
+                    Find Games for {
+                        betterNames(capitaliseWords(unslug(console)))
+                    } - Page {page}
                 </h2>
                 <Button
                     variant="link"
