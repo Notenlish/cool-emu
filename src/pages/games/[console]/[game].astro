@@ -11,8 +11,10 @@ import { supportedConsoles } from "$lib/data/consoles";
 import { Button } from "$lib/components/ui/button";
 import DownloadIcon from "$assets/download.svg";
 
-import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
+
 import SimpleCrumbs from "src/components/SimpleCrumbs.svelte";
+
+import { getAllRomGamesOfConsole } from "src/data/roms"
 
 
 type RomGame = CollectionEntry<"romgames">;
@@ -41,8 +43,8 @@ if (!playConsoleMetadata) {
 // const prettyConsoleName = capitaliseWords(unslug(gameObject.data.category));
 
 const allFeaturedGames = (
-    await getGamesOfConsoleAsEntries(playConsoleMetadata.id)
-)[1];
+    await getAllRomGamesOfConsole(playConsoleMetadata.id)
+);
 ---
 
 <Layout>
@@ -80,6 +82,15 @@ const allFeaturedGames = (
             </Button>
         </div>
         <div class="w-full flex space-between gap-4 flex-col xs:flex-row">
+            <!-- <img
+                src={gameObject.data.imgPath
+                    ? `/${gameObject.data.imgPath}`
+                    : NotFoundImage}
+                alt={"asd"}
+                class="rounded sm:w-64 w-40 object-cover"
+                width={256}
+                height={256}
+            /> -->
             <Image
                 src={gameObject.data.imgPath
                     ? `/${gameObject.data.imgPath}`

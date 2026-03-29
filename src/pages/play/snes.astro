@@ -7,9 +7,9 @@ import Controls from "src/components/Controls.astro";
 import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 import AboutConsole from "src/components/aboutConsole.astro";
 
-import { getGamesOfConsoleAsEntries } from "$lib/data/consoles";
+import { getAllRomGamesOfConsole } from "src/data/roms";
 import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
-const gamesToMap = await getGamesOfConsoleAsEntries("super-nintendo");
+const gamesToMap = await getAllRomGamesOfConsole("super-nintendo");
 
 const controlsData = [
     { name: "Button A", key: "Z" },
@@ -38,8 +38,8 @@ const controlsData = [
     <Controls rows={controlsData} />
     <section id="featuredGames" class="mx-auto container">
         <FeaturedGamesOfConsole
-            romGameArray={gamesToMap[1]}
-            consoleCategory={gamesToMap[0]}
+            romGameArray={gamesToMap}
+            consoleCategory={"super-nintendo"}
             variant="differentTitle"
         />
     </section>

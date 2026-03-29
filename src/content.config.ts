@@ -10,12 +10,13 @@ import { z } from 'astro/zod';
 const romgames = defineCollection({
     loader: file("src/data/roms.json"),
     schema: z.object({
-        href: z.string().startsWith("https://"),
+        href: z.string(),
         name: z.string(),
         imgPath: z.string(),
         imgUrl: z.string(),
         category: z.string(),
         slug: z.string(),
+        popularity_ranking: z.number(),
     })
 });
 

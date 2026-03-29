@@ -11,12 +11,21 @@ const { curPage, offset, url, maxPage, minPage } = Astro.props;
 
 const newPage = curPage + offset;
 // /games/${console}
-const possible = newPage >= minPage && newPage < maxPage;
+const showCurrentPage = offset == 0;
+const possible = newPage >= minPage && newPage < maxPage && !showCurrentPage;
 ---
 
 {
     possible && (
         <Button type="button" href={`${url}/${newPage}`}>
+            Page {newPage}
+        </Button>
+    )
+}
+
+{
+    showCurrentPage && (
+        <Button disabled type="button" href={`${url}/${newPage}`}>
             Page {newPage}
         </Button>
     )

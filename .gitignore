@@ -30,3 +30,4 @@ rows.json
 # jetbrains setting folder
 .idea/
 src/data/roms.json
+result.json

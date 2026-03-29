@@ -3,16 +3,18 @@ import Layout from "src/layouts/Layout.astro";
 import { Button } from "$lib/components/ui/button";
 import Image from "astro/components/Image.astro";
 import Game from "src/components/Game.astro";
-import PaginationButton from "src/components/paginationButton.astro";
+import PaginationButton from "src/components/PaginationButton.astro";
 
-import { unslug, capitaliseWords } from "$lib/utils";
+import {
+    unslug,
+    capitaliseWords,
+    calculatePaginationButtons,
+} from "$lib/utils";
 
 import type { GetStaticPaths } from "astro";
 import { getEntry, type CollectionEntry } from "astro:content";
-import {
-    getGamesOfConsoleAsEntries,
-    supportedConsoles,
-} from "$lib/data/consoles";
+import { supportedConsoles } from "$lib/data/consoles";
+import { getAllRomGamesOfConsole } from "src/data/roms";
 
 import SimpleCrumbs from "src/components/SimpleCrumbs.svelte";
 
@@ -24,9 +26,7 @@ export const getStaticPaths = (async () => {
     let combinations = await Promise.all(
         supportedConsoles.map(async (e) => {
             let arr = [];
-            const allGamesOfConsole = (
-                await getGamesOfConsoleAsEntries(e.id)
-            )?.[1];
+            const allGamesOfConsole = await getAllRomGamesOfConsole(e.id);
             const howManyPagesTotal = Math.ceil(
                 allGamesOfConsole.length / gamesPerPage,
             );
@@ -53,14 +53,17 @@ interface Params {
 }
 const { console, page } = Astro.params as Params;
 const pageInt = Number.parseInt(page);
-const gamesOfPage = (await getGamesOfConsoleAsEntries(console))?.[1].slice(
+
+
+const allGamesOfConsole = (await getAllRomGamesOfConsole(console));
+
+const gamesOfPage = allGamesOfConsole?.slice(
     pageInt * gamesPerPage,
     (pageInt + 1) * gamesPerPage,
 );
 
 let playConsoleMetadata = supportedConsoles.find((e) => e.id == console);
 
-const allGamesOfConsole = (await getGamesOfConsoleAsEntries(console))?.[1];
 const howManyPagesTotal = Math.ceil(allGamesOfConsole.length / gamesPerPage);
 
 const betterNames = (e) => {
@@ -71,6 +74,11 @@ const betterNames = (e) => {
     if (e == "Nintendo Ds") return "Nintendo DS";
     else return e;
 };
+
+const paginationButtonsData = calculatePaginationButtons(
+    pageInt,
+    howManyPagesTotal,
+);
 ---
 
 <Layout>
@@ -120,63 +128,20 @@ const betterNames = (e) => {
                     })
                 }
             </div>
-            <div class="mt-12">
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={-howManyPagesTotal + 1}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={-25}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={-5}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={-1}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={1}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={5}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={25}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
-                <PaginationButton
-                    curPage={pageInt}
-                    offset={howManyPagesTotal - 1}
-                    url={`/games/${console}`}
-                    maxPage={howManyPagesTotal}
-                    minPage={0}
-                />
+            <div class="mt-12 flex gap-1">
+                {
+                    paginationButtonsData.map((e) => {
+                        return (
+                            <PaginationButton
+                                curPage={pageInt}
+                                offset={e}
+                                url={`/games/${console}`}
+                                maxPage={howManyPagesTotal}
+                                minPage={0}
+                            />
+                        );
+                    })
+                }
             </div>
         </div>
     </div>

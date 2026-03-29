@@ -29,7 +29,8 @@ const LabelStyles = "w-20 text-slate-700";
                 >
                     <InputGroup.Root id="name">
                         <InputGroup.Input
-                            minLength="2"
+                            minlength="3"
+                            required
                             name="name"
                             placeholder="John"
                         />
@@ -42,11 +43,12 @@ const LabelStyles = "w-20 text-slate-700";
                     <InputGroup.Root id="lastname">
                         <InputGroup.Input
                             minLength="2"
+                            required
                             name="lastname"
                             placeholder="Doe"
                         />
                         <InputGroup.Addon>
-                            <Label.Root class={LabelStyles} for="name"
+                            <Label.Root class={LabelStyles} for="lastname"
                                 >Last Name:
                             </Label.Root>
                         </InputGroup.Addon>
@@ -54,17 +56,19 @@ const LabelStyles = "w-20 text-slate-700";
                     <InputGroup.Root id="email">
                         <InputGroup.Input
                             name="email"
+                            required
                             type="email"
                             placeholder="abc@xyz.com"
                         />
                         <InputGroup.Addon>
-                            <Label.Root class={LabelStyles} for="name"
+                            <Label.Root class={LabelStyles} for="email"
                                 >Email:
                             </Label.Root>
                         </InputGroup.Addon>
                     </InputGroup.Root>
                     <InputGroup.Root id="title">
                         <InputGroup.Input
+                            required
                             name="title"
                             placeholder="Generic Title"
                         />
@@ -76,6 +80,7 @@ const LabelStyles = "w-20 text-slate-700";
                     </InputGroup.Root>
                     <InputGroup.Root id="content">
                         <InputGroup.Textarea
+                            required
                             name="content"
                             placeholder="Enter your message"
                         />
@@ -125,13 +130,18 @@ const LabelStyles = "w-20 text-slate-700";
         "statusDescription",
     ) as HTMLElement;
 
-    const e = document.getElementById("contactForm") as HTMLFormElement;
+    const form = document.getElementById("contactForm") as HTMLFormElement;
     const b = document.getElementById("contactFormButton");
 
     const handleContactRequest = async (event) => {
-        event.preventDefault();
-
         let form = document.getElementById("contactForm") as HTMLFormElement;
+        
+        // event.preventDefault();
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            form.reportValidity(); // force UI
+        }
+        event.preventDefault();
         let formData = new FormData(form);
 
         const { data, error } = await actions.sendContactRequest(formData);
@@ -160,5 +170,5 @@ const LabelStyles = "w-20 text-slate-700";
         }
     };
 
-    e.addEventListener("submit", handleContactRequest);
+    form.addEventListener("submit", handleContactRequest);
 </script>

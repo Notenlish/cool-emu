@@ -22,31 +22,40 @@ export const supportedConsoles: { alternativeId: string, id: string, name: strin
     { alternativeId: "atari-lynx", id: "atari-lynx", name: "Atari Lynx", playUrl: "/play/atari-lynx", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
 ]
 
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getAllRomGames, getAllRomGamesOfConsole } from "src/data/roms"
+import { type CollectionEntry } from "astro:content";
+
 type RomGame = CollectionEntry<"romgames">;
 
+// TODO: Maybe this would be faster if I used the getAllRomGamesOfConsole() function from src/data/roms
 export async function getGamesOfAllConsolesAsEntries() {
-    const allRomGames = await getCollection("romgames");
+    // const allRomGames = await getAllRomGames();
 
-    type RomGame = CollectionEntry<"romgames">;
-    type GenericDict<K extends string, V> = Record<K, V>;
-    let romGamesByConsoles: GenericDict<string, Array<RomGame>> = {};
-
-    for (const rg of allRomGames) {
-        if (romGamesByConsoles[rg.data.category] == undefined) {
-            romGamesByConsoles[rg.data.category] = [];
-        }
-        romGamesByConsoles[rg.data.category].push(rg);
+    const result: Record<string, CollectionEntry<"romgames">> = {}
+    for (const console_obj of supportedConsoles.values()) {
+        result[console_obj.id] = await getAllRomGamesOfConsole(console_obj.id);
     }
+    return result;
 
-    const romGamesToMap = Object.entries(romGamesByConsoles);
+    // type RomGame = CollectionEntry<"romgames">;
+    // type GenericDict<K extends string, V> = Record<K, V>;
+    // let romGamesByConsoles: GenericDict<string, Array<RomGame>> = {};
 
-    return romGamesToMap;
+    // for (const rg of allRomGames) {
+    //     if (romGamesByConsoles[rg.data.category] == undefined) {
+    //         romGamesByConsoles[rg.data.category] = [];
+    //     }
+    //     romGamesByConsoles[rg.data.category].push(rg);
+    // }
+
+    // const romGamesToMap = Object.entries(romGamesByConsoles);
+
+    // return romGamesToMap;
 }
 
-export async function getGamesOfConsoleAsEntries(consoleCategory: string) {
-    const AllRomGamesEntries = getGamesOfAllConsolesAsEntries();
+// export async function getGamesOfConsoleAsEntries(consoleCategory: string) {
+//     const AllRomGamesEntries = getGamesOfAllConsolesAsEntries();
 
-    const games = (await AllRomGamesEntries).find((e) => e[0] == consoleCategory)
-    return games;
-}
+//     const games = (await AllRomGamesEntries).find((e) => e[0] == consoleCategory)
+//     return games;
+// }

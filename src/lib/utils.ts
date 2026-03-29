@@ -21,3 +21,18 @@ export function capitaliseWords(a: string) {
 	let words = a.trim().split(" ")
 	return words.map((e) => `${e[0].toUpperCase()}${e.slice(1)}`).join(" ")
 }
+
+export function calculatePaginationButtons(curPage, maxPage) {
+	const buttons = {}
+	const offsetRangesToTry = [-curPage, -25, -10, -5, -1, 0, 1, 5, 10, 25, maxPage - curPage - 1]
+
+	for (const offsetToTry of offsetRangesToTry) {
+		const calculatedPageNum = curPage + offsetToTry;
+
+		if (!(calculatedPageNum in buttons)) {
+			buttons[calculatedPageNum] = offsetToTry;
+		}
+	}
+
+	return Object.values(buttons)
+}
