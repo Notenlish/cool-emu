@@ -37,6 +37,14 @@
                 </p>
             </Accordion.Content>
         </Accordion.Item>
+        <Accordion.Item>
+            <Accordion.Trigger
+                >Is this vibe-coded?</Accordion.Trigger
+            >
+            <Accordion.Content class="flex flex-col gap-4 text-balance">
+                <p>No. It is made with my own sweat and tears. I have the design files too</p>
+            </Accordion.Content>
+        </Accordion.Item>
         <!-- <Accordion.Item value="item-3">
             <Accordion.Trigger>Return Policy</Accordion.Trigger>
             <Accordion.Content class="flex flex-col gap-4 text-balance">
