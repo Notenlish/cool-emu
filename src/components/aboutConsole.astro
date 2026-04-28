@@ -3,24 +3,32 @@ import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 import Image from "astro/components/Image.astro";
 
 interface Props {
-    NesConsoleImage: ImageMetadata;
-    title: string;
+  NesConsoleImage: ImageMetadata;
+  title: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  imgStyle?:string;
 }
-const { NesConsoleImage, title } = Astro.props;
+let { NesConsoleImage, title, width = 320, height = 180, alt, imgStyle } = Astro.props;
+
+if (!alt) {
+    alt = title;
+}
 ---
 
 <section id="aboutConsole" class="container mx-auto mt-6 pb-12 px-2 sm:px-0">
-    <h2 class="text-xl sm:text-2xl mt-12 mb-4">{title}</h2>
-    <div class="flex sm:flex-row flex-col gap-4">
-        <Image
-            src={NesConsoleImage}
-            alt="nes console image"
-            width={320}
-            height={180}
-            class="aspect-video h-fit"
-        />
+  <h2 class="text-xl sm:text-2xl mt-12 mb-4">{title}</h2>
+  <div class="flex sm:flex-row flex-col gap-4">
+    <Image
+      src={NesConsoleImage}
+      alt={title}
+      width={width}
+      height={height}
+      class={`aspect-video h-fit ${imgStyle}`}
+    />
 
-        <slot name="description" />
-    </div>
-        <slot name="attribution" />
+    <slot name="description" />
+  </div>
+  <slot name="attribution" />
 </section>

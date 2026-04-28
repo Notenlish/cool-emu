@@ -1,7 +1,6 @@
 ---
 import PlayConsole from "src/components/PlayConsole.astro";
 import Layout from "src/layouts/Layout.astro";
-import Image from "astro/components/Image.astro";
 import NesConsoleImage from "$assets/consoles/NES-Console-Set.png";
 import Controls from "src/components/Controls.astro";
 import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
@@ -24,7 +23,7 @@ const controlsData = [
     { name: "Eject/Insert Disk", key: "E" },
     { name: "Quick Save", key: "1" },
     { name: "Quick Load", key: "2" },
-    { name: "Change Save State", key: "3" },
+    { name: "Change Save Slot", key: "3" },
 ];
 ---
 
@@ -68,7 +67,7 @@ const controlsData = [
             NES image by
             <SimpleLink
                 target="_blank"
-                href="//commons.wikimedia.org/wiki/User:Evan-Amos"
+                href="https://commons.wikimedia.org/wiki/User:Evan-Amos"
                 >Evan-Amos</SimpleLink
             > - <span class="int-own-work" lang="en">Own work</span>, Public
             Domain, <SimpleLink

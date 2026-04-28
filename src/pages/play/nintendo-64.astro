@@ -11,19 +11,27 @@ import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro"
 const gamesToMap = await getAllRomGamesOfConsole("nintendo-64");
 
 const controlsData = [
-    { name: "Button A", key: "Z" },
-    { name: "Button B", key: "X" },
-    { name: "Select", key: "V" },
+    { name: "Button A", key: "X" },
+    { name: "Button B", key: "S" },
     { name: "Start", key: "Enter" },
     { name: "Up", key: "Up Arrow" },
     { name: "Down", key: "Down Arrow" },
     { name: "Left", key: "Left Arrow" },
     { name: "Right", key: "Right Arrow" },
-    { name: "Swap Disks", key: "Q" },
-    { name: "Eject/Insert Disk", key: "E" },
+    { name: "L", key: "Q" },
+    { name: "R", key: "e" },
+    { name: "Z", key: "Tab" },
+    { name: "Stick Up", key: "T" },
+    { name: "Stick Down", key: "G" },
+    { name: "Stick Left", key: "F" },
+    { name: "Stick Right", key: "H" },
+    { name: "C-Pad Up", key: "I" },
+    { name: "C-Pad Down", key: "K" },
+    { name: "C-Pad Right", key: "L" },
+    { name: "C-Pad Left", key: "J" },
     { name: "Quick Save", key: "1" },
     { name: "Quick Load", key: "2" },
-    { name: "Change Save State", key: "3" },
+    { name: "Change Save Slot", key: "3" },
 ];
 ---
 
@@ -63,7 +71,7 @@ const controlsData = [
             Nintendo 64 image by
             <SimpleLink
                 target="_blank"
-                href="//commons.wikimedia.org/wiki/User:Evan-Amos"
+                href="https://commons.wikimedia.org/wiki/User:Evan-Amos"
                 >Evan-Amos</SimpleLink
             > - <span class="int-own-work" lang="en">Own work</span>, Public
             Domain, <SimpleLink

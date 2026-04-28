@@ -24,7 +24,7 @@ export function capitaliseWords(a: string) {
 
 export function calculatePaginationButtons(curPage, maxPage) {
 	const buttons = {}
-	const offsetRangesToTry = [-curPage, -25, -10, -5, -1, 0, 1, 5, 10, 25, maxPage - curPage - 1]
+	const offsetRangesToTry = [-curPage, -25, -15, -10, -5, -1, 0, 1, 5, 10, 15, 25, maxPage - curPage - 1]
 
 	for (const offsetToTry of offsetRangesToTry) {
 		const calculatedPageNum = curPage + offsetToTry;
