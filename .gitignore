@@ -31,3 +31,5 @@ rows.json
 .idea/
 src/data/roms.json
 result.json
+
+.wrangler/
