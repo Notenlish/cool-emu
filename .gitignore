@@ -33,3 +33,4 @@ src/data/roms.json
 result.json
 
 .wrangler/
+oldist/

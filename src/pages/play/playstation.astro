@@ -1,7 +1,7 @@
 ---
 import PlayConsole from "src/components/PlayConsole.astro";
 import Layout from "src/layouts/Layout.astro";
-import GameboyAdvanceImage from "$assets/consoles/gameboy-advance.png";
+import PlaystationImage from "$assets/consoles/playstation.png";
 import Controls from "src/components/Controls.astro";
 import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 import AboutConsole from "src/components/aboutConsole.astro";
@@ -9,7 +9,7 @@ import AboutConsole from "src/components/aboutConsole.astro";
 import { getAllRomGamesOfConsole } from "src/data/roms";
 import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
 
-const gamesToMap = await getAllRomGamesOfConsole("gameboy-advance");
+const gamesToMap = await getAllRomGamesOfConsole("playstation");
 
 const controlsData = [
   { name: "Button A", key: "Z" },
@@ -30,49 +30,50 @@ const controlsData = [
 
 <Layout>
   <PlayConsole
-    title="Gameboy Advance (GBA)"
-    description="You can play any Gameboy Advance(GBA) game by uploading the game's file here."
+    title="Playstation (PS)"
+    description="You can play any Playstation game by uploading the game's file here."
     aspectRatioTailwind="aspect-[4/3]"
-    core="gba"
+    core="ps"
   />
   <Controls rows={controlsData} />
   <section id="featuredGames" class="mx-auto container">
     <FeaturedGamesOfConsole
       romGameArray={gamesToMap}
-      consoleCategory="gameboy-advance"
+      consoleCategory="playstation"
       variant="differentTitle"
     />
   </section>
   <AboutConsole
-    title="Gameboy Advance(GBA)"
-    consoleImage={GameboyAdvanceImage}
+    title="Playstation(PS)"
+    consoleImage={PlaystationImage}
     width={1043 * 0.25}
     height={720 * 0.25}
     imgStyle="object-contain !aspect-square"
   >
     <p slot="description">
-      The Game Boy Advance(GBA) is a handheld video game console manufactured
-      and sold by Nintendo. It was released in Japan on <time
-        datetime="21-03-2001">March 21, 2001</time
-      > and was released on international markets in June. It primarily competed against
-      Nokia's N-Gage and Bandai's WonderSwan consoles.
+      The Playstation (PS) is a handheld video game console manufactured and
+      sold by Sony. It was released in Japan on <time datetime="03-12-1994"
+        >December 3rd, 1994</time
+      > and in North America on <time datetime="09-09-1995"
+        >9th of September, 1995</time
+      >. It primarily competed against Nintendo's N64 and Sega Saturn consoles.
       <br />
-      The Gameboy Advance offered a more powerful ARM7 processor and improved graphics
-      while also retaining backwards compatibility with Gameboy games. The system
-      was a 32 bit system with 288 KB of system ram and 98 KB of video ram. Although
-      it was not as successful as the Nintendo DS later released by Nintendo, the
-      console saw huge popularity when it first released, with the best-selling game
-      for the console having sold 16 million copies.
+      The Playstation's hardware included a 32 bit RISC CPU with 2 MB ram and 1 MB
+      video ram. The Playstation was weak compared to its competitor Nintendo 64 system
+      but it made up for it with its relatively abundant storage space on discs. The
+      console saw huge popularity when it was first released, and it has become the
+      first computer entertainment platform to ship over 100 million units. The best-selling
+      game for the console, Gran Turismo has sold a total of 10.85 million copies.
     </p>
     <div slot="attribution">
-      Gameboy Advance image by
+      Playstation image by
       <SimpleLink
         target="_blank"
         href="https://commons.wikimedia.org/wiki/User:Evan-Amos"
         >Evan-Amos</SimpleLink
       > -<span class="int-own-work" lang="en"> Own work</span>, Public Domain, <SimpleLink
         target="_blank"
-        href="https://commons.wikimedia.org/w/index.php?curid=122403889"
+        href="https://commons.wikimedia.org/w/index.php?curid=52461914"
         >Link</SimpleLink
       >.
     </div>

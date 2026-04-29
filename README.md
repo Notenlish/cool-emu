@@ -8,14 +8,30 @@ I cant upload this to fucking git.
 
 FUUCK.
 
-
-
 Also I love how my laptop becomes a jet machine when I'm trying to run npm build at 1 AM. Really appreciate that, Intel Chip.
 
-## build
+## Deployment
+
+Do not actually think you can deploy this like a normal person. I am doing deployments manually because I am a maniac and don't want to connect R2 and some other stupidly named cloudflare service to store my assets.
+
+To deploy you need to scrape the files yourself and then create a cloudflare pages deployment. Then, go to cloudflare dashboard, create an pages project and use wrangler to upload the files because Cloudflare doesn't like it when you upload more than 1000+ files using the webpage.
+
+run this:
+`wrangler login`
+
+then do: `wrangler pages deploy dist`
+
+DON'T try to deploy to my project though, so you need to update wrangler.jsonc so that its your project instead.
+
+you either need to create a new project or use an existing project that you own.
+
+Uploading files takes an INSANELY long time.
+
+
+## Build
 dont forget to check if the js files of emulator.js are minified. run `npm run build`.
 
-## scraping
+## Scraping
 cd scraper
 scrapy crawl romsgames -o roms.json
 
@@ -27,6 +43,13 @@ oh and you need to add the consoles to the getStaticPaths in src/pages/games/[co
 why? idk honestly.
 
 note: src/data/roms.json is gitignored bcuz its too big.
+
+## Dev Server
+`npm run dev`
+
+if you have scraped all the possible games then npm run dev will take a really long time(like a minute or more) to start. That's normal.
+
+Don't ask me what's the fix for it. I do not know.
 
 ## Commands
 

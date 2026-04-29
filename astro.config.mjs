@@ -5,7 +5,7 @@ import svelte from '@astrojs/svelte';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import cloudflare from '@astrojs/cloudflare';
+// import cloudflare from '@astrojs/cloudflare';
 
 // import db from '@astrojs/db';
 
@@ -13,9 +13,11 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   integrations: [svelte()],
 
+  output: "static",
+
   vite: {
     plugins: [tailwindcss()]
   },
 
-  adapter: cloudflare()
+  // adapter: cloudflare()
 });

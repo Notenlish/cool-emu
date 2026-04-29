@@ -117,13 +117,3 @@ if (!playConsoleMetadata) {
                     romGameArray.map((g) => {
                         return (
                             <Game
-                                consoleCategory={playConsoleMetadata?.id}
-                                gameObject={g}
-                            />
-                        );
-                    })
-                }
-            </div>
-        </div>
-    </div>
-</Layout>
