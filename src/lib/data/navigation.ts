@@ -8,5 +8,6 @@ export const headerNavigationLinks: { url: string, text: string }[] = [
 export const footerNavigationLinks: { url: string, text: string }[] = [
     { url: "/play", text: "Play" },
     { url: "/games", text: "Games" },
-    { url: "/contact-us", text: "Contact Us" }
+    { url: "/contact-us", text: "Contact Us" },
+    { url: "/feedback", text: "Feedback" },
 ]

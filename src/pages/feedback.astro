@@ -1,0 +1,132 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import * as Card from "$lib/components/ui/card/index.js";
+import * as InputGroup from "$lib/components/ui/input-group";
+import * as Label from "$lib/components/ui/label/index.js";
+import { Button } from "$lib/components/ui/button";
+
+const labelStyles = "w-20 text-slate-700";
+---
+
+<Layout>
+  <section
+    id="feedback"
+    class="w-full grow flex flex-col gap-4 container mx-auto max-w-lg mt-[12vh] mb-auto"
+  >
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Send Feedback</Card.Title>
+        <Card.Description
+          >You can send feedback about this website using this form.</Card.Description
+        >
+      </Card.Header>
+      <Card.Content>
+        <form class="flex flex-col gap-2" id="feedbackForm" method="post">
+          <InputGroup.Root id="username">
+            <InputGroup.Input
+              minLength="3"
+              required
+              name="username"
+              placeholder="Enter username (or make it up)"
+            />
+            <InputGroup.Addon>
+              <Label.Root class={labelStyles}>Username:</Label.Root
+              ></InputGroup.Addon
+            >
+          </InputGroup.Root>
+          <InputGroup.Root id="title">
+            <InputGroup.Input
+              required
+              name="title"
+              placeholder="Enter Feedback Title"
+            />
+            <InputGroup.Addon>
+              <Label.Root class={labelStyles} for="title">Title:</Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+          <InputGroup.Root id="content">
+            <InputGroup.Textarea
+              required
+              name="content"
+              placeholder="Enter your feedback here."
+            />
+            <InputGroup.Addon align="block-start">
+              <Label.Root class={labelStyles} for="content">
+                Message:
+              </Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+
+          <Button
+            id="feedbackFormButton"
+            onclick={(e) => {
+              e?.preventDefault();
+            }}
+            type="submit">Send</Button
+          >
+        </form>
+      </Card.Content>
+    </Card.Root>
+
+    <!-- message display -->
+    <Card.Root
+      id="statusContainer"
+      style="display:none;"
+      class="bg-green-50 border-green-100 text-green-700 border-2 p-4 flex items-center content-center flex-col"
+    >
+      <Card.Header
+        id="statusHeader"
+        class="grow text-current text-center mx-4 w-full"
+      >
+        Successfully sent feedback.
+      </Card.Header>
+      <Card.Description id="statusDescription" class="text-current text-center">
+        Thank you for the feedback!
+      </Card.Description>
+    </Card.Root>
+  </section>
+</Layout>
+
+<script>
+  import { actions } from "astro:actions";
+  const stContainer = document.getElementById("statusContainer") as HTMLElement;
+  const stHeader = document.getElementById("statusHeader") as HTMLElement;
+  const stDescription = document.getElementById(
+    "statusDescription",
+  ) as HTMLElement;
+
+  const form = document.getElementById("feedbackForm") as HTMLFormElement;
+
+  const handleFeedback = async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+    }
+
+    let formData = new FormData(form);
+
+    const { data, error } = await actions.sendFeedback(formData);
+
+    handleResponse(data, error);
+  };
+
+  const handleResponse = (data, err) => {
+    if (!err) {
+      console.log("Successfully received", data);
+      stContainer.style.display = "block";
+      stContainer.style.backgroundColor = "var(--color-green-50)";
+      stContainer.style.borderColor = "var(--color-green-100)";
+      stContainer.style.color = "var(--color-green-700)";
+      stHeader.textContent = "Successfully sent feedback.";
+      stDescription.textContent = "Thank you for the feedback!";
+    } else {
+      stContainer.style.display = "block";
+      stContainer.style.backgroundColor = "var(--color-red-50)";
+      stContainer.style.borderColor = "var(--color-red-100)";
+      stContainer.style.color = "var(--color-red-700)";
+      stHeader.textContent = "Ran into an error when ending feedback.";
+      stDescription.textContent = err?.message;
+    }
+  };
+  form.addEventListener("submit", handleFeedback);
+</script>

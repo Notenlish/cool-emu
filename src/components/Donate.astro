@@ -43,20 +43,18 @@ let donationFaq: {
 >
   <!-- The fucking tiled bg -->
   <div
-    class="rotate-z-12 rotate-x-10 -translate-x-24 absolute bg-size-[96px] pixelated content-none bg-[url('/donate-tiling-bg.png')] bg-repeat w-[300%] h-[300%] top-0 left-0 z-0 opacity-6"
+    id="donate-tiled-bg"
+    class="rotate-z-12 rotate-x-10 -translate-x-24 absolute bg-size-[96px] pixelated content-none bg-[url('/donate-tiling-bg.png')] bg-repeat w-[300%] h-[300%] top-0 left-0 z-0 opacity-7"
   >
   </div>
 
   <!-- The fucking radial gradient -->
   <div
-    class="bg-radial-[transparent,transparent] from-transparent to-[#FEEAEA] from-50% to-100%  absolute w-full h-full left-0 top-0 content-none z-20"
+    class="bg-radial-[transparent,transparent] from-transparent to-[#FEEAEA] from-50% to-100% absolute w-full h-full left-0 top-0 content-none z-20"
   >
   </div>
 
-  
-  <div
-    class="relative sm:container sm:mx-auto flex flex-col items-center z-50"
-  >
+  <div class="relative sm:container sm:mx-auto flex flex-col items-center z-50">
     <div class="flex items-center gap-2 mb-8">
       <Image
         class="text-red-500 opacity-75"
@@ -123,3 +121,16 @@ let donationFaq: {
     </ul>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+
+  const elem = document.getElementById("donate-tiled-bg");
+
+  gsap.to(elem, {
+    backgroundPosition: "96px 96px",
+    ease: "linear",
+    duration: 7,
+    repeat: -1,
+  });
+</script>
