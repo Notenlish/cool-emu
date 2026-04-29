@@ -231,3 +231,7 @@ p {
   position: absolute;
   animation: hoverAnim 1s ease-in-out infinite alternate;
 }
+
+.pixelated {
+  image-rendering: pixelated;
+}

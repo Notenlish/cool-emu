@@ -3,28 +3,30 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "src/components/Hero.astro";
 import ConsoleList from "src/components/ConsoleList.astro";
 import Features from "src/components/Features.astro";
-import FAQ from "src/components/Faq.svelte";
+import Donate from "src/components/Donate.astro";
+import TEST from "src/components/test.svelte";
 ---
 
 <Layout>
-	<Hero />
-	<ConsoleList />
-	<Features />
-	<!--
+  <Hero />
+  <ConsoleList />
+  <Features />
+  <!--
 	<FeaturedGames />
 	<Games />
 	<GameCategories />
 	-->
-	<FAQ client:load />
-	<!-- TODO: Maybe add game categories to the header too? -->
-	<!-- TODO: I should honestly just go and copy websites like https://www.kraloyun.com/ and https://www.oyunskor.com/ -->
-	<!-- TODO: Make pages for all the cheat codes for spesific games -->
-	<!-- TODO: Oh and I could add a "search for cheats" section on my website, so that when emulating a game, for example Mario you can look at cheats -->
+  <TEST client:load />
+  <Donate client:load />
+  <!-- TODO: Maybe add game categories to the header too? -->
+  <!-- TODO: I should honestly just go and copy websites like https://www.kraloyun.com/ and https://www.oyunskor.com/ -->
+  <!-- TODO: Make pages for all the cheat codes for spesific games -->
+  <!-- TODO: Oh and I could add a "search for cheats" section on my website, so that when emulating a game, for example Mario you can look at cheats -->
 </Layout>
 
 <style>
-	body {
-		/* font-weight: 300;
+  body {
+    /* font-weight: 300;
 		font-size: 1.4rem; */
-	}
+  }
 </style>

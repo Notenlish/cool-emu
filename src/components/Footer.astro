@@ -9,17 +9,16 @@ import HeartIcon from "$assets/heart.svg";
     <div class="container mx-auto flex justify-between items-center">
         <a
             href="/"
-            class="gap-2 items-center hidden sm:flex"
-            style="font-family: 'Jersey 10'; font-weight:300;"
+            class="gap-2 items-center hidden sm:flex tracking-[-5%] font-semibold"
         >
             <!-- I can't use the <Image /> element because the image optimization & resizing by astro is not helpful as I need the "pixelated" look -->
             <img
                 class="h-[51px]"
                 style={"aspect-ratio:1/1;image-rendering: pixelated;"}
                 alt="Cool Emu"
-                src="/ce-icon.svg"
+                src="/better-logo.svg"
             />
-            <span class="text-5xl hidden lg:inline-block">Cool Emu</span>
+            <span class="text-3xl hidden lg:inline-block">Cool Emu</span>
         </a>
         <nav class="flex gap-6 sm:text-lg text-base h-fit">
             {
@@ -32,7 +31,7 @@ import HeartIcon from "$assets/heart.svg";
                 })
             }
         </nav>
-        <div>
+        <div class="invisible">
             <Button
                 href="https://buymeacoffee.com/notenlish"
                 variant="link"

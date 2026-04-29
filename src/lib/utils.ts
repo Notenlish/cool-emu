@@ -22,8 +22,8 @@ export function capitaliseWords(a: string) {
 	return words.map((e) => `${e[0].toUpperCase()}${e.slice(1)}`).join(" ")
 }
 
-export function calculatePaginationButtons(curPage, maxPage) {
-	const buttons = {}
+export function calculatePaginationButtons(curPage: number, maxPage: number) {
+	const buttons: number[] = []
 	const offsetRangesToTry = [-curPage, -25, -15, -10, -5, -1, 0, 1, 5, 10, 15, 25, maxPage - curPage - 1]
 
 	for (const offsetToTry of offsetRangesToTry) {

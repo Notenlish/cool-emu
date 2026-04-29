@@ -1,0 +1,125 @@
+---
+import Image from "astro/components/Image.astro";
+import PixelatedHeartIcon from "$assets/heart-pixelated-red.svg";
+import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
+import CoolLittleButton from "src/components/CoolLittleButton.svelte";
+
+let donationFaq: {
+  type: "text" | "link" | "share" | "donate" | "feedback";
+  content: string;
+  href?: string;
+}[][] = [
+  [
+    { type: "text", content: "Share this website with a friend. " },
+    {
+      type: "share",
+      content: "Share",
+    },
+  ],
+  [
+    {
+      type: "text",
+      content: "Give feedback to this website. ",
+    },
+    { type: "feedback", content: "Feedback", href: "/feedback" },
+  ],
+  [
+    {
+      type: "text",
+      content: "You can donate. ",
+    },
+    {
+      type: "donate",
+      href: "https://buymeacoffee.com/notenlish",
+      content: "Donate",
+    },
+  ],
+];
+---
+
+<section
+  id="donate"
+  class="py-12 mb-12 sm:px-0 px-2 bg-red-100/70 relative z-0 overflow-clip"
+>
+  <!-- The fucking tiled bg -->
+  <div
+    class="rotate-z-12 rotate-x-10 -translate-x-24 absolute bg-size-[96px] pixelated content-none bg-[url('/donate-tiling-bg.png')] bg-repeat w-[300%] h-[300%] top-0 left-0 z-0 opacity-6"
+  >
+  </div>
+
+  <!-- The fucking radial gradient -->
+  <div
+    class="bg-radial-[transparent,transparent] from-transparent to-[#FEEAEA] from-50% to-100%  absolute w-full h-full left-0 top-0 content-none z-20"
+  >
+  </div>
+
+  
+  <div
+    class="relative sm:container sm:mx-auto flex flex-col items-center z-50"
+  >
+    <div class="flex items-center gap-2 mb-8">
+      <Image
+        class="text-red-500 opacity-75"
+        width={42}
+        height={42}
+        src={PixelatedHeartIcon}
+        alt="heart"
+      />
+      <h2 class="text-2xl sm:text-3xl font-semibold text-red-700/70">
+        Want to Help?
+      </h2>
+    </div>
+    <p>You can help in the following ways:</p>
+    <ul class="">
+      {
+        donationFaq.map((arr) => {
+          return (
+            <li class="list-disc mb-2">
+              {arr.map((el) => {
+                if (el.type == "text") return <span>{el.content}</span>;
+                if (el.type == "link")
+                  return (
+                    <SimpleLink href={el.href as string}>
+                      {el.content}
+                    </SimpleLink>
+                  );
+                if (el.type == "share")
+                  return (
+                    <CoolLittleButton
+                      classStyle="-mb-2"
+                      client:load
+                      variant="outline_pink"
+                      functionality="share"
+                      content={el.content}
+                    />
+                  );
+                if (el.type == "donate")
+                  return (
+                    <CoolLittleButton
+                      classStyle="-mb-2"
+                      client:load
+                      variant="outline_pink"
+                      href={el.href}
+                      openNewTab={true}
+                      content={el.content}
+                    />
+                  );
+                if (el.type == "feedback")
+                  return (
+                    <CoolLittleButton
+                      classStyle="-mb-2"
+                      client:load
+                      variant="outline_pink"
+                      href="/feedback"
+                      openNewTab={true}
+                      content={el.content}
+                    />
+                  );
+              })}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
