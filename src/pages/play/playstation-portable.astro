@@ -1,0 +1,63 @@
+---
+import PlayConsole from "src/components/PlayConsole.astro";
+import Layout from "src/layouts/Layout.astro";
+import PlaystationPortableImage from "$assets/consoles/psp.jpg";
+import Controls from "src/components/Controls.astro";
+import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
+import AboutConsole from "src/components/aboutConsole.astro";
+
+import { getAllRomGamesOfConsole } from "src/data/roms";
+import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
+
+const gamesToMap = await getAllRomGamesOfConsole("playstation-portable");
+
+const controlsData = [];
+---
+
+<Layout>
+  <PlayConsole
+    title="Playstation Portable(PSP)"
+    description="You can play any Playstation Portable(PSP) game by uploading the game's file here."
+    aspectRatioTailwind="aspect-[16/9]"
+    core="psp"
+  />
+  <Controls rows="controlsData" />
+  <section id="featuredGames" class="mx-auto container">
+    <FeaturedGamesOfConsole
+      romGameArray={gamesToMap}
+      consoleCategory="playstation-portable"
+      variant="differentTitle"
+    />
+  </section>
+
+  <AboutConsole
+    title="Playstation Portable(PSP)"
+    consoleImage={PlaystationPortableImage}
+    width={1268 * 0.25}
+    height={720 * 0.25}
+    imgStyle="object-contain"
+  >
+    <p slot="description">
+      The Playstation Portable is a handheld video game console developed and
+      sold by Sony. It was first released in Japan on <time
+        datetime="12-11-2004">December 12, 2004</time
+      >, in North America on <time datetime="24-05-2005">March 24, 2005</time>.
+      The PSP primarily competed with the Nintendo DS.
+      <br />
+      The hardware of the PSP includes a 222-333 Mhz 32 bit RISC processor with 32/64
+      MB of system ram. PSP was a popular product and sold over 80 million units during
+      its 10 year lifespan.
+    </p>
+    <div slot="attribution">
+      Playstation Portable image by <SimpleLink
+        target="_blank"
+        href="https://commons.wikimedia.org/wiki/User:Evan-Amos"
+        >Evan-Amos</SimpleLink
+      > - <span class="int-own-work" lang="en">Own work</span>, Public Domain, <SimpleLink
+        target="_blank"
+        href="https://commons.wikimedia.org/w/index.php?curid=11337256"
+        >Link</SimpleLink
+      >
+    </div>
+  </AboutConsole>
+</Layout>
