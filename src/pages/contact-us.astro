@@ -9,166 +9,176 @@ const LabelStyles = "w-20 text-slate-700";
 ---
 
 <Layout>
-    <section
-        class="w-full grow flex flex-col gap-4 container mx-auto max-w-lg mt-[12vh] mb-auto"
-        id="contact"
-    >
-        <Card.Root>
-            <Card.Header>
-                <Card.Title>Send Contact Request</Card.Title>
-                <Card.Description
-                    >You can contact us through this form.</Card.Description
-                >
-            </Card.Header>
-            <Card.Content>
-                <form
-                    class="flex flex-col gap-2"
-                    id="contactForm"
-                    method="post"
-                >
-                    <InputGroup.Root id="name">
-                        <InputGroup.Input
-                            minlength="3"
-                            required
-                            name="name"
-                            placeholder="John"
-                        />
-                        <InputGroup.Addon>
-                            <Label.Root class={LabelStyles} for="name"
-                                >Name:
-                            </Label.Root>
-                        </InputGroup.Addon>
-                    </InputGroup.Root>
-                    <InputGroup.Root id="lastname">
-                        <InputGroup.Input
-                            minLength="2"
-                            required
-                            name="lastname"
-                            placeholder="Doe"
-                        />
-                        <InputGroup.Addon>
-                            <Label.Root class={LabelStyles} for="lastname"
-                                >Last Name:
-                            </Label.Root>
-                        </InputGroup.Addon>
-                    </InputGroup.Root>
-                    <InputGroup.Root id="email">
-                        <InputGroup.Input
-                            name="email"
-                            required
-                            type="email"
-                            placeholder="abc@xyz.com"
-                        />
-                        <InputGroup.Addon>
-                            <Label.Root class={LabelStyles} for="email"
-                                >Email:
-                            </Label.Root>
-                        </InputGroup.Addon>
-                    </InputGroup.Root>
-                    <InputGroup.Root id="title">
-                        <InputGroup.Input
-                            required
-                            name="title"
-                            placeholder="Generic Title"
-                        />
-                        <InputGroup.Addon>
-                            <Label.Root class={LabelStyles} for="title"
-                                >Title:
-                            </Label.Root>
-                        </InputGroup.Addon>
-                    </InputGroup.Root>
-                    <InputGroup.Root id="content">
-                        <InputGroup.Textarea
-                            required
-                            name="content"
-                            placeholder="Enter your message"
-                        />
-                        <InputGroup.Addon align="block-start">
-                            <Label.Root class={LabelStyles} for="content"
-                                >Message:
-                            </Label.Root>
-                        </InputGroup.Addon>
-                    </InputGroup.Root>
-
-                    <Button
-                        id="contactFormButton"
-                        onclick={(event) => {
-                            event.preventDefault();
-                        }}
-                        type="submit"
-                        >Submit
-                    </Button>
-                </form>
-            </Card.Content>
-        </Card.Root>
-        <Card.Root
-            class="bg-green-50 border-green-100 text-green-700 border-2 p-4 flex items-center content-center flex-col"
-            id="statusContainer"
-            style={"display:none;"}
+  <section
+    class="w-full grow flex flex-col gap-4 container mx-auto max-w-lg mt-[12vh] mb-auto"
+    id="contact"
+  >
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Send Contact Request</Card.Title>
+        <Card.Description
+          >You can contact us through this form.</Card.Description
         >
-            <Card.Header
-                class="grow text-current text-center mx-4 w-full"
-                id="statusHeader">Successfully sent contact request.</Card.Header
-            >
-            <Card.Description
-                class="text-current text-center"
-                id="statusDescription">Please wait for reply.</Card.Description
-            >
-        </Card.Root>
-        <p class="text-black/80">If you're going to send copyright claims, you must ensure that you provide proof to prove you are the copyright holder. This site does not host game roms.</p>
-    </section>
+      </Card.Header>
+      <Card.Content>
+        <form class="flex flex-col gap-2" id="contactForm" method="post">
+          <InputGroup.Root id="name">
+            <InputGroup.Input
+              minlength="3"
+              required
+              name="name"
+              placeholder="John"
+            />
+            <InputGroup.Addon>
+              <Label.Root class={LabelStyles} for="name">Name: </Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+          <InputGroup.Root id="lastname">
+            <InputGroup.Input
+              minLength="2"
+              required
+              name="lastname"
+              placeholder="Doe"
+            />
+            <InputGroup.Addon>
+              <Label.Root class={LabelStyles} for="lastname"
+                >Last Name:
+              </Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+          <InputGroup.Root id="email">
+            <InputGroup.Input
+              name="email"
+              required
+              type="email"
+              placeholder="abc@xyz.com"
+            />
+            <InputGroup.Addon>
+              <Label.Root class={LabelStyles} for="email">Email: </Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+          <InputGroup.Root id="title">
+            <InputGroup.Input
+              required
+              name="title"
+              placeholder="Generic Title"
+            />
+            <InputGroup.Addon>
+              <Label.Root class={LabelStyles} for="title">Title: </Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+          <InputGroup.Root id="content">
+            <InputGroup.Textarea
+              required
+              name="content"
+              placeholder="Enter your message"
+            />
+            <InputGroup.Addon align="block-start">
+              <Label.Root class={LabelStyles} for="content"
+                >Message:
+              </Label.Root>
+            </InputGroup.Addon>
+          </InputGroup.Root>
+
+          <Button
+            id="contactFormButton"
+            onclick={(event) => {
+              event.preventDefault();
+            }}
+            type="submit"
+            >Submit
+          </Button>
+        </form>
+      </Card.Content>
+    </Card.Root>
+    <Card.Root
+      class="bg-green-50 border-green-100 text-green-700 border-2 p-4 flex items-center content-center flex-col"
+      id="statusContainer"
+      style={"display:none;"}
+    >
+      <Card.Header
+        class="grow text-current text-center mx-4 w-full"
+        id="statusHeader">Successfully sent contact request.</Card.Header
+      >
+      <Card.Description class="text-current text-center" id="statusDescription"
+        >Please wait for reply.</Card.Description
+      >
+    </Card.Root>
+    <p class="text-black/80">
+      If you're going to send copyright claims, you must ensure that you provide
+      proof to prove you are the copyright holder. This site does not host game
+      roms.
+    </p>
+  </section>
 </Layout>
 
 <script>
-    import { actions } from "astro:actions";
+//   import { actions } from "astro:actions";
 
-    const stContainer = document.getElementById(
-        "statusContainer",
-    ) as HTMLElement;
-    const stHeader = document.getElementById("statusHeader") as HTMLElement;
-    const stDescription = document.getElementById(
-        "statusDescription",
-    ) as HTMLElement;
+  const stContainer = document.getElementById("statusContainer") as HTMLElement;
+  const stHeader = document.getElementById("statusHeader") as HTMLElement;
+  const stDescription = document.getElementById(
+    "statusDescription",
+  ) as HTMLElement;
 
-    const form = document.getElementById("contactForm") as HTMLFormElement;
-    const b = document.getElementById("contactFormButton");
+  const form = document.getElementById("contactForm") as HTMLFormElement;
+  const b = document.getElementById("contactFormButton");
 
-    const handleContactRequest = async (event) => {
-        let form = document.getElementById("contactForm") as HTMLFormElement;
-        
-        // event.preventDefault();
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            form.reportValidity(); // force UI
-        }
-        event.preventDefault();
-        let formData = new FormData(form);
+  const handleContactRequest = async (event) => {
+    let form = document.getElementById("contactForm") as HTMLFormElement;
 
-        const { data, error } = await actions.sendContactRequest(formData);
+    // event.preventDefault();
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      form.reportValidity(); // force UI
+    }
+    event.preventDefault();
+    let formData = new FormData(form);
 
-        handleResponse(data, error);
+    const IKNOW =
+      "I know that you know that the webhook link is exposed in client side, however I can't be bothered to change the entire fucking build process and deploy to Cloudflare workers. So please be a normal human being and keep this secret. I trust you.";
+    const CONTACT_WEBHOOK = `${IKNOW.slice(0, 0)}https://discord.com/api/webhooks/1480544065685553243/Vg9BlIsDofmN0wdcBznHsATMiIiGx8d6Gi-IOh03nZprDRyeEA6PUjuiRIswpceYXT58`;
+
+    let msg = `**New Contact Request**!\nName: ${formData.get("name")} - Lastname: ${formData.get("lastname")}\nTitle: ${formData.get("title")}\nEmail:${formData.get("email")}\n${formData.get("content")}`;
+
+    const init = {
+      method: "POST",
+      body: JSON.stringify({ content: msg }),
+      headers: { "Content-Type": "application/json" },
     };
 
-    const handleResponse = (data, error) => {
-        if (!error) {
-            console.log("Successfully received", data);
-            stContainer.style.display = "block";
-            stContainer.style.backgroundColor = "var(--color-green-50)";
-            stContainer.style.borderColor = "var(--color-green-100)";
-            stContainer.style.color = "var(--color-green-700)";
-            stHeader.textContent = "Successfully sent contact request.";
-            stDescription.textContent =
-                "Please wait for a reply to your contact request.";
-        } else {
-            stContainer.style.display = "block";
-            stContainer.style.backgroundColor = "var(--color-red-50)";
-            stContainer.style.borderColor = "var(--color-red-100)";
-            stContainer.style.color = "var(--color-red-700)";
-            stHeader.textContent =
-                "Ran into an error when sending contact request.";
-            stDescription.textContent = error?.message;
-        }
-    };
+    const response = await fetch(CONTACT_WEBHOOK as string, init);
 
-    form.addEventListener("submit", handleContactRequest);
+    let error, data;
+    if (!response.ok) {
+      error = "Server had an issue processing your request.";
+    } else {
+      data = "Successfully sent feedback.";
+    }
+    // const { data, error } = await actions.sendContactRequest(formData);
+
+    handleResponse(data, error);
+  };
+
+  const handleResponse = (data, error) => {
+    if (!error) {
+      console.log("Successfully received", data);
+      stContainer.style.display = "block";
+      stContainer.style.backgroundColor = "var(--color-green-50)";
+      stContainer.style.borderColor = "var(--color-green-100)";
+      stContainer.style.color = "var(--color-green-700)";
+      stHeader.textContent = "Successfully sent contact request.";
+      stDescription.textContent =
+        "Please wait for a reply to your contact request.";
+    } else {
+      stContainer.style.display = "block";
+      stContainer.style.backgroundColor = "var(--color-red-50)";
+      stContainer.style.borderColor = "var(--color-red-100)";
+      stContainer.style.color = "var(--color-red-700)";
+      stHeader.textContent = "Ran into an error when sending contact request.";
+      stDescription.textContent = error?.message;
+    }
+  };
+
+  form.addEventListener("submit", handleContactRequest);
 </script>

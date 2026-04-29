@@ -88,7 +88,7 @@ const labelStyles = "w-20 text-slate-700";
 </Layout>
 
 <script>
-  import { actions } from "astro:actions";
+  // import { actions } from "astro:actions";
   const stContainer = document.getElementById("statusContainer") as HTMLElement;
   const stHeader = document.getElementById("statusHeader") as HTMLElement;
   const stDescription = document.getElementById(
@@ -105,7 +105,28 @@ const labelStyles = "w-20 text-slate-700";
 
     let formData = new FormData(form);
 
-    const { data, error } = await actions.sendFeedback(formData);
+    // const { data, error } = await actions.sendFeedback(formData);
+
+    const IKNOW =
+      "I know that you know that the webhook link is exposed in client side, however I can't be bothered to change the entire fucking build process and deploy to Cloudflare workers. So please be a normal human being and keep this secret. I trust you.";
+    const CONTACT_WEBHOOK = `${IKNOW.slice(0, 0)}https://discord.com/api/webhooks/1480544065685553243/Vg9BlIsDofmN0wdcBznHsATMiIiGx8d6Gi-IOh03nZprDRyeEA6PUjuiRIswpceYXT58`;
+
+    let msg = `**New Feedback**\nUsername: ${formData.get("username")}\nTitle:${formData.get("title")}\n${formData.get("content")}`;
+
+    const init = {
+      method: "POST",
+      body: JSON.stringify({ content: msg }),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const response = await fetch(CONTACT_WEBHOOK as string, init);
+
+    let error, data;
+    if (!response.ok) {
+      error = "Server had an issue processing your request.";
+    } else {
+      data = "Successfully sent feedback.";
+    }
 
     handleResponse(data, error);
   };
