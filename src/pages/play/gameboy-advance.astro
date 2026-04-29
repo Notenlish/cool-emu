@@ -1,0 +1,80 @@
+---
+import PlayConsole from "src/components/PlayConsole.astro";
+import Layout from "src/layouts/Layout.astro";
+import GameboyAdvanceImage from "$assets/consoles/gameboy-advance.png";
+import Controls from "src/components/Controls.astro";
+import SimpleLink from "$lib/components/ui/SimpleLink/Simplelink.svelte";
+import AboutConsole from "src/components/aboutConsole.astro";
+
+import { getAllRomGamesOfConsole } from "src/data/roms";
+import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
+
+const gamesToMap = await getAllRomGamesOfConsole("gameboy-advance");
+
+const controlsData = [
+  { name: "Button A", key: "Z" },
+  { name: "Button B", key: "X" },
+  { name: "Button L", key: "Q" },
+  { name: "Button R", key: "E" },
+  { name: "Select", key: "V" },
+  { name: "Start", key: "Enter" },
+  { name: "Up", key: "Up Arrow" },
+  { name: "Down", key: "Down Arrow" },
+  { name: "Left", key: "Left Arrow" },
+  { name: "Right", key: "Right Arrow" },
+  { name: "Quick Save", key: "1" },
+  { name: "Quick Load", key: "2" },
+  { name: "Change Save State", key: "3" },
+];
+---
+
+<Layout>
+  <PlayConsole
+    title="Gameboy Advance (GBA)"
+    description="You can play any Gameboy Advance(GBA) game by uploading the game's file here."
+    aspectRatioTailwind="aspect-[4/3]"
+    core="gba"
+  />
+  <Controls rows={controlsData} />
+  <section id="featuredGames" class="mx-auto container">
+    <FeaturedGamesOfConsole
+      romGameArray={gamesToMap}
+      consoleCategory="gameboy-advance"
+      variant="differentTitle"
+    />
+  </section>
+  <AboutConsole
+    title="Gameboy Advance(GBA)"
+    consoleImage={GameboyAdvanceImage}
+    width={1043 * 0.25}
+    height={720 * 0.25}
+    imgStyle="object-contain !aspect-square"
+  >
+    <p slot="description">
+      The Game Boy Advance(GBA) is a handheld video game console manufactured
+      and sold by Nintendo. It was released in Japan on <time
+        datetime="21-03-2001">March 21, 2001</time
+      > and was released on international markets in June. It primarily competed against
+      Nokia's N-Gage and Bandai's WonderSwan consoles.
+      <br />
+      The Gameboy Advance offered a more powerful ARM7 processor and improved graphics
+      while also retaining backwards compatibility with Gameboy games. The system
+      was a 32 bit system with 288 KB of system ram and 98 KB of video ram. Although
+      it was not as successful as the Nintendo DS later released by Nintendo, the
+      console saw huge popularity when it first released, with the best-selling game
+      for the console having sold 16 million copies.
+    </p>
+    <div slot="attribution">
+      Gameboy Advance image by
+      <SimpleLink
+        target="_blank"
+        href="https://commons.wikimedia.org/wiki/User:Evan-Amos"
+        >Evan-Amos</SimpleLink
+      > -<span class="int-own-work" lang="en"> Own work</span>, Public Domain, <SimpleLink
+        target="_blank"
+        href="https://commons.wikimedia.org/w/index.php?curid=122403889"
+        >Link</SimpleLink
+      >.
+    </div>
+  </AboutConsole>
+</Layout>

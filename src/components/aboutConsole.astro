@@ -3,14 +3,14 @@ import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
 import Image from "astro/components/Image.astro";
 
 interface Props {
-  NesConsoleImage: ImageMetadata;
+  consoleImage: ImageMetadata;
   title: string;
   alt?: string;
   width?: number;
   height?: number;
   imgStyle?:string;
 }
-let { NesConsoleImage, title, width = 320, height = 180, alt, imgStyle } = Astro.props;
+let { consoleImage, title, width = 320, height = 180, alt, imgStyle } = Astro.props;
 
 if (!alt) {
     alt = title;
@@ -21,7 +21,7 @@ if (!alt) {
   <h2 class="text-xl sm:text-2xl mt-12 mb-4">{title}</h2>
   <div class="flex sm:flex-row flex-col gap-4">
     <Image
-      src={NesConsoleImage}
+      src={consoleImage}
       alt={title}
       width={width}
       height={height}
