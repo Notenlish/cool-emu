@@ -31,6 +31,8 @@ Uploading files takes an INSANELY long time.
 ## Build
 dont forget to check if the js files of emulator.js are minified. run `npm run build`.
 
+man im scared to even stop this its just... going. WTF!
+
 ## Scraping
 cd scraper
 scrapy crawl romsgames -o roms.json

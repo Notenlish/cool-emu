@@ -1,4 +1,5 @@
 ---
+import type { GetStaticPaths } from "astro";
 // I changed this to true.
 // PLEASE ALLOW ME TO BUILD STATIC VERSION OF THIS SITE.
 export const prerender = true; // https://docs.astro.build/en/guides/routing/#on-demand-dynamic-routes
@@ -13,78 +14,96 @@ import { supportedConsoles } from "$lib/data/consoles";
 import { Button } from "$lib/components/ui/button";
 import DownloadIcon from "$assets/download.svg";
 
+export const getStaticPaths = (async () => {
+  const paths: { params: { console: string; game: string } }[] = [];
+
+  for (const consoleMetadata of supportedConsoles) {
+    const games = await getAllRomGamesOfConsole(consoleMetadata.id);
+
+    for (const game of games) {
+      paths.push({
+        params: {
+          console: consoleMetadata.id,
+          game: game.data.slug,
+        },
+      });
+    }
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
 
 import SimpleCrumbs from "src/components/SimpleCrumbs.svelte";
 
-import { getAllRomGamesOfConsole } from "src/data/roms"
-
+import { getAllRomGamesOfConsole } from "src/data/roms";
 
 type RomGame = CollectionEntry<"romgames">;
 
 interface Params {
-    console: string;
-    game: string;
+  console: string;
+  game: string;
 }
 const { console, game } = Astro.params as Params;
 
 const gameObject: RomGame | undefined = await getEntry("romgames", game);
 if (!gameObject) {
-    Astro.response.status = 404;
-    Astro.response.statusText = "Game Not found";
-    //
-    return Astro.rewrite("/404");
+  Astro.response.status = 404;
+  Astro.response.statusText = "Game Not found";
+  //
+  return Astro.rewrite("/404");
 }
 
 const playConsoleMetadata = supportedConsoles.find((e) => e.id == console);
 if (!playConsoleMetadata) {
-    Astro.response.status = 404;
-    Astro.response.statusText = "Console Not found";
-    //
-    return Astro.rewrite("/404");
+  Astro.response.status = 404;
+  Astro.response.statusText = "Console Not found";
+  //
+  return Astro.rewrite("/404");
 }
 // const prettyConsoleName = capitaliseWords(unslug(gameObject.data.category));
 
-const allFeaturedGames = (
-    await getAllRomGamesOfConsole(playConsoleMetadata.id)
-);
+const allFeaturedGames = await getAllRomGamesOfConsole(playConsoleMetadata.id);
 ---
 
 <Layout>
-    <section
-        id="game"
-        class="sm:mx-auto sm:container px-2 sm:px-0 pt-[15vh] pb-12"
+  <section
+    id="game"
+    class="sm:mx-auto sm:container px-2 sm:px-0 pt-[15vh] pb-12"
+  >
+    <SimpleCrumbs
+      crumbs={[
+        { text: "Home", link: "/" },
+        { text: "Games", link: "/games" },
+        {
+          text: `${playConsoleMetadata.name} Games`,
+          link: `/games/${console}/0`,
+        },
+      ]}
+    />
+    <div
+      class="w-full flex sm:flex-row flex-col mb-8 content-center justify-between"
     >
-        <SimpleCrumbs
-            crumbs={[
-                { text: "Home", link: "/" },
-                { text: "Games", link: "/games" },
-                { text: `${playConsoleMetadata.name} Games`, link: `/games/${console}/0` },
-            ]}
+      <h1 class="text-3xl sm:self-center sm:mb-0 mb-2">
+        {gameObject.data.name} ROM For {playConsoleMetadata.name}
+      </h1>
+      <Button
+        variant="link"
+        href={playConsoleMetadata.playUrl}
+        size="lg"
+        class="text-white py-6! rounded cursor-pointer flex gap-2 w-fit p-3 hover:opacity-60"
+        style={`background-color: ${playConsoleMetadata.color};`}
+      >
+        <Image
+          height={42}
+          width={42}
+          src={playConsoleMetadata.imgUrl}
+          alt="controller"
         />
-        <div
-            class="w-full flex sm:flex-row flex-col mb-8 content-center justify-between"
-        >
-            <h1 class="text-3xl sm:self-center sm:mb-0 mb-2">
-                {gameObject.data.name} ROM For {playConsoleMetadata.name}
-            </h1>
-            <Button
-                variant="link"
-                href={playConsoleMetadata.playUrl}
-                size="lg"
-                class="text-white py-6! rounded cursor-pointer flex gap-2 w-fit p-3 hover:opacity-60"
-                style={`background-color: ${playConsoleMetadata.color};`}
-            >
-                <Image
-                    height={42}
-                    width={42}
-                    src={playConsoleMetadata.imgUrl}
-                    alt="controller"
-                />
-                Play {playConsoleMetadata.name}
-            </Button>
-        </div>
-        <div class="w-full flex space-between gap-4 flex-col xs:flex-row">
-            <!-- <img
+        Play {playConsoleMetadata.name}
+      </Button>
+    </div>
+    <div class="w-full flex space-between gap-4 flex-col xs:flex-row">
+      <!-- <img
                 src={gameObject.data.imgPath
                     ? `/${gameObject.data.imgPath}`
                     : NotFoundImage}
@@ -93,41 +112,41 @@ const allFeaturedGames = (
                 width={256}
                 height={256}
             /> -->
-            <Image
-                src={gameObject.data.imgPath
-                    ? `/${gameObject.data.imgPath}`
-                    : NotFoundImage}
-                alt={"asd"}
-                class="rounded sm:w-64 w-40 object-cover"
-                width={256}
-                height={256}
-            />
-            <div>
-                <p>
-                    {gameObject.data.name} ROM Download for {
-                        playConsoleMetadata.name
-                    }. {gameObject.data.name} game is available to play online on
-                    an emulator. You can find the {gameObject.data.name} ROM for {
-                        playConsoleMetadata.name
-                    } download here. {playConsoleMetadata.name} requires an emulator
-                    to play the game.
-                </p>
-                <Button
-                    class="h-14 px-4! flex gap-2 w-fit text-lg bg-rose-500 hover:bg-rose-300"
-                    target="_blank"
-                    href={gameObject.data.href}
-                    ><DownloadIcon class="size-8" />Download</Button
-                >
-            </div>
-        </div>
-    </section>
-    <section class="w-full pt-2 pb-12 bg-slate-50">
-        <div class="mx-auto container">
-            <FeaturedGamesOfConsole
-                variant="differentTitle"
-                consoleCategory={playConsoleMetadata.id}
-                romGameArray={allFeaturedGames}
-            />
-        </div>
-    </section>
+      <Image
+        src={gameObject.data.imgPath
+          ? `/${gameObject.data.imgPath}`
+          : NotFoundImage}
+        alt={"asd"}
+        class="rounded sm:w-64 w-40 object-cover"
+        width={256}
+        height={256}
+      />
+      <div>
+        <p>
+          {gameObject.data.name} ROM Download for {playConsoleMetadata.name}. {
+            gameObject.data.name
+          } game is available to play online on an emulator. You can find the {
+            gameObject.data.name
+          } ROM for {playConsoleMetadata.name} download here. {
+            playConsoleMetadata.name
+          } requires an emulator to play the game.
+        </p>
+        <Button
+          class="h-14 px-4! flex gap-2 w-fit text-lg bg-rose-500 hover:bg-rose-300"
+          target="_blank"
+          href={gameObject.data.href}
+          ><DownloadIcon class="size-8" />Download</Button
+        >
+      </div>
+    </div>
+  </section>
+  <section class="w-full pt-2 pb-12 bg-slate-50">
+    <div class="mx-auto container">
+      <FeaturedGamesOfConsole
+        variant="differentTitle"
+        consoleCategory={playConsoleMetadata.id}
+        romGameArray={allFeaturedGames}
+      />
+    </div>
+  </section>
 </Layout>

@@ -14,7 +14,10 @@ export default defineConfig({
   output: "static",
   integrations: [svelte()],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    resolve: {
+      noExternal: ["@lucide/svelte", "bits-ui", "svelte-toolbelt", "runed"]
+    }
   },
 
   // adapter: cloudflare()
