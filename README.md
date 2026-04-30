@@ -27,6 +27,8 @@ you either need to create a new project or use an existing project that you own.
 
 Uploading files takes an INSANELY long time.
 
+wrangler has 20k file limit, be careful about that
+
 
 ## Build
 dont forget to check if the js files of emulator.js are minified. run `npm run build`.

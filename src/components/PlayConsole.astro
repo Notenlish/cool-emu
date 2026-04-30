@@ -168,12 +168,12 @@ const { title, description, core, aspectRatioTailwind } = Astro.props;
         EJS_gameUrl = data["gameFile"];
 
         // Path to the data directory
-        EJS_pathtodata = "data/";
+        EJS_pathtodata = "/emulatorjs/data/";
         EJS_DEBUG_XX = true;
         // EJS_language = "tr";
 
         const scriptTag = document.createElement("script");
-        scriptTag.src = "data/loader.js";
+        scriptTag.src = "/emulatorjs/data/loader.js";
         document.body.appendChild(scriptTag);
     };
 </script>
