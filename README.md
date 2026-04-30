@@ -13,19 +13,17 @@ run this:
 
 then do: `wrangler pages deploy dist`
 
-DON'T try to deploy to my project though, so you need to update wrangler.jsonc so that its your project instead.
+Don't try to deploy to my project though, so you need to update wrangler.jsonc so that its your project instead.
 
 you either need to create a new project or use an existing project that you own.
 
-Uploading files takes an INSANELY long time.
+Uploading files takes a really long time.
 
 wrangler has 20k file limit, be careful about that
 
 
 ## Build
 dont forget to check if the js files of emulator.js are minified. run `npm run build`.
-
-man im scared to even stop this its just... going. WTF!
 
 ## Scraping
 cd scraper
@@ -36,7 +34,6 @@ you then need to move the roms.json from scraper to src/data/
 and also copy over all the public static images from scraper/gameimages/ to public/gameimages/
 
 oh and you need to add the consoles to the getStaticPaths in src/pages/games/[console].astro
-why? idk honestly.
 
 note: src/data/roms.json is gitignored bcuz its too big.
 
