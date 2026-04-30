@@ -1,14 +1,6 @@
 # Cool Emu 
 
-Cool emulator
-
-I just realized, I need to like actually deploy this project. 
-I have 25k loc json and like 20k images. 
-I cant upload this to fucking git.
-
-FUUCK.
-
-Also I love how my laptop becomes a jet machine when I'm trying to run npm build at 1 AM. Really appreciate that, Intel Chip.
+Web based retro emulator. https://cool-emu.pages.dev/
 
 ## Deployment
 
