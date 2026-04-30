@@ -1,0 +1,58 @@
+---
+import PlayConsole from "src/components/PlayConsole.astro";
+import Layout from "src/layouts/Layout.astro";
+import AtariJaguarImage from "$assets/consoles/atari-jaguar.png";
+import Controls from "src/components/Controls.astro";
+import SimpleLink from "$lib/components/ui/SimpleLink/SimpleLink.svelte";
+import AboutConsole from "src/components/aboutConsole.astro";
+
+import { getAllRomGamesOfConsole } from "src/data/roms";
+import FeaturedGamesOfConsole from "src/components/FeaturedGamesOfConsole.astro";
+const gamesToMap = await getAllRomGamesOfConsole("atari-jaguar");
+
+// const controlsData = [{ name: "Button A", key: "Z" }];
+---
+
+<Layout>
+  <PlayConsole
+    title="Atari Jaguar"
+    description="You can play any Atari Jaguar game by uploading the game's file here."
+    aspectRatioTailwind="aspect-[4/3]"
+    core="jaguar"
+  />
+  <!-- <Controls rows={controlsData} /> -->
+  <section id="featuredGames" class="mx-auto container">
+    <FeaturedGamesOfConsole
+      romGameArray={gamesToMap}
+      consoleCategory="atari-jaguar"
+      variant="differentTitle"
+    />
+  </section>
+  <AboutConsole
+    title="Atari Jaguar"
+    consoleImage={AtariJaguarImage}
+    width={1280 * 0.25}
+    height={550 * 0.25}
+    imgStyle="object-contain"
+  >
+    <p slot="description">
+      The Atari Jaguar is a video game console developed by Atari and released
+      in North America in November 1993. Despite impressive sounding
+      technicality such as being a 64 bit system, Atari failed to capture market
+      share from last generation consoles.
+      <br />
+      The system has a Motorola 68000 chip with 2 MB ram.
+    </p>
+    <div slot="attribution">
+      Atari Jaguar image by <SimpleLink
+        target="_blank"
+        href="https://commons.wikimedia.org/wiki/User:Evan-Amos"
+        >Evan-Amos</SimpleLink
+      > - <span>Own work</span>, Public Domain, <SimpleLink
+        target="_blank"
+        href="https://commons.wikimedia.org/w/index.php?curid=18269035"
+        >Link</SimpleLink
+      >
+    </div>
+  </AboutConsole>
+</Layout>

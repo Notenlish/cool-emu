@@ -19,7 +19,7 @@ export const supportedConsoles: { alternativeId: string, id: string, name: strin
     // { alternativeId: "atari-5200-supersystem", id: "atari-5200-supersystem", name: "Atari 5200 Supersystem", playUrl: "/play/atari-5200", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
     // { alternativeId: "atari-2600", id: "atari-2600", name: "Atari 2600", playUrl: "/play/atari-2600", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
     // { alternativeId: "amiga-500", id: "amiga-500", name: "Amiga 500", playUrl: "/play/amiga-500", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
-    // { alternativeId: "atari-jaguar", id: "atari-jaguar", name: "Atari Jaguar", playUrl: "/play/atari-jaguar", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
+    { alternativeId: "atari-jaguar", id: "atari-jaguar", name: "Atari Jaguar", playUrl: "/play/atari-jaguar", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
     // { alternativeId: "atari-lynx", id: "atari-lynx", name: "Atari Lynx", playUrl: "/play/atari-lynx", description: "", imgUrl: Controller4, color: "oklch(51.1% 0.262 276.966)", cssClass: "" },
 ]
 
