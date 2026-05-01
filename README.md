@@ -27,6 +27,7 @@ dont forget to check if the js files of emulator.js are minified. run `npm run b
 
 ## Scraping
 cd scraper
+
 scrapy crawl romsgames -o roms.json
 
 you then need to move the roms.json from scraper to src/data/
