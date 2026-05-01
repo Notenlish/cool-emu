@@ -21,6 +21,8 @@ Uploading files takes a really long time.
 
 wrangler has 20k file limit, be careful about that
 
+check file count using `find . -type f | wc -l`
+
 
 ## Build
 dont forget to check if the js files of emulator.js are minified. run `npm run build`.
